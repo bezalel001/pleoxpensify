@@ -12,6 +12,7 @@ Technologies and Tools
 
 ### Folder Structure
 
+```
 ├── App.js
 ├── App.scss
 ├── App.test.js
@@ -81,3 +82,4 @@ Technologies and Tools
 └── utils
 ├── constants.js
 └── functions.js
+```
