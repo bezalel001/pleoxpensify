@@ -42,10 +42,10 @@ export const setFilterCurrency = filterCurrency => {
  * @param  {String} startDate Filter start date
  * @return {Object}            Action object
  */
-export const setFilterStateDate = startDate => {
+export const setFilterStateDate = filterStartDate => {
   return {
     type: SET_FILTER_START_DATE,
-    startDate
+    filterStartDate
   };
 };
 
@@ -55,9 +55,9 @@ export const setFilterStateDate = startDate => {
  * @param  {String} endDate Filter end date
  * @return {Object}         Action object
  */
-export const setFilterEndDate = endDate => {
+export const setFilterEndDate = filterEndDate => {
   return {
     type: SET_FILTER_END_DATE,
-    endDate
+    filterEndDate
   };
 };

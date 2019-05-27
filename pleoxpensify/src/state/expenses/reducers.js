@@ -8,7 +8,7 @@ import {
   FETCH_EXPENSES_REQUEST,
   FETCH_EXPENSES_SUCCESS
 } from '../action-types';
-import getExpensesInitialState from '../initial-state';
+import { getExpensesInitialState } from '../initial-state';
 
 /**
  * `Reducer` function which handles expense-related actions

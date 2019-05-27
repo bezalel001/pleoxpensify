@@ -1,4 +1,4 @@
-const getExpensesInitialState = () => {
+export const getExpensesInitialState = () => {
   return {
     expenses: [],
     totalExpenses: 0,
@@ -10,4 +10,12 @@ const getExpensesInitialState = () => {
     refresh: false
   };
 };
-export default getExpensesInitialState;
+
+export const getFiltersInitialState = () => {
+  return {
+    filterText: '',
+    filterCurrency: '',
+    filterStartDate: null,
+    filterEndDate: null
+  };
+};
