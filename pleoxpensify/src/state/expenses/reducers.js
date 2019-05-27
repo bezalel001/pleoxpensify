@@ -13,9 +13,9 @@ import getExpensesInitialState from '../initial-state';
 /**
  * `Reducer` function which handles expense-related actions
  *
- * @param {Object} state - current state
- * @param {Object} action - expense-related action
- * @return {Object} updated state
+ * @param {Object} state  Current State
+ * @param {Object} action Expense-related Action
+ * @return {Object}       Updated State
  */
 const expensesReducer = (state = getExpensesInitialState(), action) => {
   switch (action.type) {
