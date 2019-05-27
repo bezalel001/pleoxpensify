@@ -9,9 +9,9 @@ import thunk from 'redux-thunk';
 /**
  * Internal dependencies
  */
-import expensesReducer from '../expenses/reducers';
+import rootReducer from '../root-reducer';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 export default () =>
-  createStore(expensesReducer, composeEnhancers(applyMiddleware(thunk)));
+  createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)));

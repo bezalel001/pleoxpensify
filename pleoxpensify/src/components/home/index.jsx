@@ -14,16 +14,26 @@ import ExpenseList from '../expense-list';
 
 const ExpensesHome = props => {
   const { expenses } = props;
+  const data = expenses.expenses;
 
   return (
     <div className="expenses-home">
-      <ExpenseList expenses={expenses} />
+      <ExpenseList expenses={data} />
     </div>
   );
 };
 
 ExpensesHome.propTypes = {
-  expenses: PropTypes.arrayOf(PropTypes.object).isRequired
+  expenses: PropTypes.shape({
+    expenses: PropTypes.arrayOf(PropTypes.object),
+    isLoading: PropTypes.bool,
+    page: PropTypes.number,
+    refresh: PropTypes.bool,
+    totalExpenses: PropTypes.number,
+    totalPages: PropTypes.number,
+    didInvalidate: PropTypes.bool,
+    error: PropTypes.string
+  }).isRequired
 };
 
 const mapStateToProps = state => {
