@@ -12,6 +12,10 @@ import { Provider } from 'react-redux';
 import configureStore from './state/store';
 import { fetchExpenses } from './state/expenses/actions';
 import Approuter from './routers';
+/**
+ * Style dependencies
+ */
+import './App.scss';
 
 /**
  *  Configure store and load expenses on app bootstrap
@@ -23,7 +27,9 @@ store.dispatch(fetchExpenses({}));
 function App() {
   return (
     <Provider store={store}>
-      <Approuter />
+      <div className="container">
+        <Approuter />
+      </div>
     </Provider>
   );
 }

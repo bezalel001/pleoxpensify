@@ -76,6 +76,7 @@ export const fetchExpenses = ({
       }
     });
     const { expenses, total } = await response.data;
+
     dispatch(fetchExpensesSuccess(expenses, total));
   } catch (error) {
     dispatch(fetchExpensesFailure(error));

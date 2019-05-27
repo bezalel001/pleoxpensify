@@ -1,0 +1,15 @@
+.expense-list-item {
+  font-size: 120%;
+  display: flex;
+  align-items: center;
+  justify-content: first flex-start;
+
+  &__user {
+    margin-left: 2rem;
+    margin-right: 5rem;
+  }
+
+  &__amount {
+    margin-left: 5rem;
+  }
+}

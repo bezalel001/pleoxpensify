@@ -11,16 +11,21 @@ import PropTypes from 'prop-types';
  */
 import ExpenseListItem from '../expense-list-item';
 
+/**
+ * Style dependencies
+ */
+import './style.scss';
+
 const ExpenseList = props => {
   const { expenses } = props;
 
   return (
     <div className="expense-list">
-      <ul className="expense-list-items">
+      <ul className="expense-list___items">
         {expenses.length > 0 &&
           expenses.map(expense => {
             return (
-              <li key={expense.id}>
+              <li className="expense-list__items--item" key={expense.id}>
                 <ExpenseListItem expense={expense} />
               </li>
             );

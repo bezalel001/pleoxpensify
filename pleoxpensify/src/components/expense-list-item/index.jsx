@@ -11,7 +11,14 @@ import PropTypes from 'prop-types';
  */
 import formatAmount from '../../utils/functions';
 
-const ExpenseListItem = ({ user, amount }) => {
+/**
+ * Style dependencies
+ */
+import './style.scss';
+
+const ExpenseListItem = props => {
+  const { expense } = props;
+  const { user, amount } = expense;
   const name = `${user.first} ${user.last}`;
   const formattedAmount = formatAmount(amount);
   return (

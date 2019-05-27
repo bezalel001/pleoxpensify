@@ -9,13 +9,13 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 /**
  * Internal dependencies
  */
-import Home from './components/home';
+import ExpensesHome from './components/home';
 
 const Approuter = () => {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/" component={Home} />
+        <Route path="/" component={ExpensesHome} />
       </Switch>
     </BrowserRouter>
   );
