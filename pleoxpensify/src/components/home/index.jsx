@@ -12,6 +12,7 @@ import { connect } from 'react-redux';
  */
 import ExpenseListFilters from '../expense-list-filters';
 import ExpenseList from '../expense-list';
+import getVisibleExpenses from '../../selectors';
 
 const ExpensesHome = props => {
   const { expenses } = props;
@@ -43,8 +44,9 @@ ExpensesHome.propTypes = {
 };
 
 const mapStateToProps = state => {
+  const expenses = getVisibleExpenses(state.expenses, state.filters);
   return {
-    expenses: state.expenses
+    expenses: { ...state.expenses, expenses }
   };
 };
 

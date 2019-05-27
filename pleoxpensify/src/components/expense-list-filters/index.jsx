@@ -37,10 +37,11 @@ class ExpenseListFilters extends Component {
     calenderFocusedInput: null
   };
 
-  onDatesChange = ({ filterStartDate, filterEndDate }) => {
+  onDatesChange = ({ startDate, endDate }) => {
     const { dispatch } = this.props;
-    dispatch(setFilterStartDate(filterStartDate));
-    dispatch(setFilterEndDate(filterEndDate));
+    console.log('filter start date', startDate);
+    dispatch(setFilterStartDate(startDate));
+    dispatch(setFilterEndDate(endDate));
   };
 
   render() {
