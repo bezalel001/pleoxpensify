@@ -10,6 +10,7 @@ import { connect } from 'react-redux';
 /**
  * Internal dependencies
  */
+import ExpenseListFilters from '../expense-list-filters';
 import ExpenseList from '../expense-list';
 
 const ExpensesHome = props => {
@@ -18,7 +19,12 @@ const ExpensesHome = props => {
 
   return (
     <div className="expenses-home">
-      <ExpenseList expenses={data} />
+      <div className="expenses-home__expense-list-filters">
+        <ExpenseListFilters />
+      </div>
+      <div className="expenses-home__expense-list">
+        <ExpenseList expenses={data} />
+      </div>
     </div>
   );
 };
