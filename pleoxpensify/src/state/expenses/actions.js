@@ -11,7 +11,9 @@ import axios from 'axios';
 import {
   FETCH_EXPENSES_FAILURE,
   FETCH_EXPENSES_REQUEST,
-  FETCH_EXPENSES_SUCCESS
+  FETCH_EXPENSES_SUCCESS,
+  SET_CURRENT_PAGE,
+  SET_TOTAL_NUMBER_OF_PAGES
 } from '../action-types';
 import { LIMIT, BASE_URL } from '../../utils/constants';
 
@@ -81,4 +83,30 @@ export const fetchExpenses = ({
   } catch (error) {
     dispatch(fetchExpensesFailure(error));
   }
+};
+
+/**
+ * Returns an action object signalling that the current page has been set
+ *
+ * @param  {String} page Current page
+ * @return {Object}      Action object
+ */
+export const setCurrrentPage = page => {
+  return {
+    type: SET_CURRENT_PAGE,
+    page
+  };
+};
+
+/**
+ * Returns an action object signalling that the total number of pages has been set
+ *
+ * @param  {String} totalPages Total number of pages
+ * @return {Object}            Action object
+ */
+export const setTotalNumberOfPages = totalPages => {
+  return {
+    type: SET_TOTAL_NUMBER_OF_PAGES,
+    totalPages
+  };
 };

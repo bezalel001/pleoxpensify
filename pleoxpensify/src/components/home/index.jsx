@@ -3,7 +3,7 @@
 /**
  * External dependencies
  */
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
@@ -13,22 +13,35 @@ import { connect } from 'react-redux';
 import ExpenseListFilters from '../expense-list-filters';
 import ExpenseList from '../expense-list';
 import getVisibleExpenses from '../../selectors';
+import { setTotalNumberOfPages } from '../../state/expenses/actions';
+import { LIMIT } from '../../utils/constants';
 
-const ExpensesHome = props => {
-  const { expenses } = props;
-  const data = expenses.expenses;
+class ExpensesHome extends Component {
+  componentDidUpdate(preveProps) {
+    const { expenses, dispatch } = this.props;
+    const { totalExpenses } = expenses;
 
-  return (
-    <div className="expenses-home">
-      <div className="expenses-home__expense-list-filters">
-        <ExpenseListFilters />
+    if (totalExpenses !== preveProps.expenses.totalExpenses) {
+      dispatch(setTotalNumberOfPages(Math.ceil(totalExpenses / LIMIT)));
+    }
+  }
+
+  render() {
+    const { expenses } = this.props;
+    const data = expenses.expenses;
+
+    return (
+      <div className="expenses-home">
+        <div className="expenses-home__expense-list-filters">
+          <ExpenseListFilters />
+        </div>
+        <div className="expenses-home__expense-list">
+          <ExpenseList expenses={data} />
+        </div>
       </div>
-      <div className="expenses-home__expense-list">
-        <ExpenseList expenses={data} />
-      </div>
-    </div>
-  );
-};
+    );
+  }
+}
 
 ExpensesHome.propTypes = {
   expenses: PropTypes.shape({
