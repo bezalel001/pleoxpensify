@@ -49,11 +49,14 @@ const ExpenseDetail = props => {
 };
 ExpenseDetail.propTypes = {
   user: PropTypes.shape({
-    first: PropTypes.string,
-    last: PropTypes.string,
-    email: PropTypes.string
+    first: PropTypes.string.isRequired,
+    last: PropTypes.string.isRequired,
+    email: PropTypes.string.isRequired
   }).isRequired,
-  amount: PropTypes.string.isRequired,
+  amount: PropTypes.shape({
+    currency: PropTypes.string.isRequired,
+    value: PropTypes.number.isRequired
+  }).isRequired,
   date: PropTypes.string.isRequired,
   merchant: PropTypes.string.isRequired,
   comment: PropTypes.string,

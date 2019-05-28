@@ -13,7 +13,10 @@ import {
   FETCH_EXPENSES_REQUEST,
   FETCH_EXPENSES_SUCCESS,
   SET_CURRENT_PAGE,
-  SET_TOTAL_NUMBER_OF_PAGES
+  SET_TOTAL_NUMBER_OF_PAGES,
+  ADD_COMMENT_TO_EXPENSE_FAILURE,
+  ADD_COMMENT_TO_EXPENSE_REQUEST,
+  ADD_COMMENT_TO_EXPENSE_SUCCESS
 } from '../action-types';
 import { LIMIT, BASE_URL } from '../../utils/constants';
 
@@ -88,7 +91,7 @@ export const fetchExpenses = ({
 /**
  * Returns an action object signalling that the current page has been set
  *
- * @param  {String} page Current page
+ * @param  {Number} page Current page
  * @return {Object}      Action object
  */
 export const setCurrrentPage = page => {
@@ -101,7 +104,7 @@ export const setCurrrentPage = page => {
 /**
  * Returns an action object signalling that the total number of pages has been set
  *
- * @param  {String} totalPages Total number of pages
+ * @param  {Number} totalPages Total number of pages
  * @return {Object}            Action object
  */
 export const setTotalNumberOfPages = totalPages => {
@@ -109,4 +112,65 @@ export const setTotalNumberOfPages = totalPages => {
     type: SET_TOTAL_NUMBER_OF_PAGES,
     totalPages
   };
+};
+
+/**
+ * Returns an action object signalling that the request to add comment to expense
+ *
+ * @param  {Number}  expenseId Expense id
+ * @return {Object}            Action object
+ */
+export const addCommentToExpenseRequest = expenseId => {
+  return {
+    type: ADD_COMMENT_TO_EXPENSE_REQUEST,
+    expenseId
+  };
+};
+
+/**
+ * Returns an action object signalling that comment has been successfully added to expense
+ *
+ * @param  {Number}  expenseId Expense id
+ * @param  {String}  comment   Expense comment
+ * @return {Object}            Action object
+ */
+export const addCommentToExpenseSuccess = (expenseId, comment) => {
+  return {
+    type: ADD_COMMENT_TO_EXPENSE_SUCCESS,
+    expenseId,
+    comment
+  };
+};
+
+/**
+ * Returns an action object signalling that comment could not be added to expense
+ *
+ * @param  {Number}  expenseId Expense id
+ * @return {Object}            Action object
+ */
+export const addCommentToExpenseFailure = (expenseId, errorMessage) => {
+  return {
+    type: ADD_COMMENT_TO_EXPENSE_REQUEST,
+    expenseId,
+    errorMessage
+  };
+};
+
+/**
+ * Returns an action thunk, dispatching progress of a request to retrieve expenses
+ * for a page and limit options.
+ *
+ * @param  {Number}   expenseId ExpenseId
+ * @param  {String}   comment   Comment to be added
+ * @return {Function}           Action thunk
+ */
+export const addCommentToExpense = (expenseId, comment) => async dispatch => {
+  try {
+    dispatch(addCommentToExpenseRequest(expenseId));
+    const response = await axios.post(`${BASE_URL}/${expenseId}`, comment);
+    const data = await response.data;
+    dispatch(addCommentToExpenseSuccess(expenseId, data.comment));
+  } catch (error) {
+    dispatch(addCommentToExpenseFailure(expenseId, error));
+  }
 };

@@ -3,12 +3,16 @@
 /**
  * Internal dependencies
  */
+import { arrowFunctionExpression } from '@babel/types';
 import {
   FETCH_EXPENSES_FAILURE,
   FETCH_EXPENSES_REQUEST,
   FETCH_EXPENSES_SUCCESS,
   SET_CURRENT_PAGE,
-  SET_TOTAL_NUMBER_OF_PAGES
+  SET_TOTAL_NUMBER_OF_PAGES,
+  ADD_COMMENT_TO_EXPENSE_FAILURE,
+  ADD_COMMENT_TO_EXPENSE_SUCCESS,
+  ADD_COMMENT_TO_EXPENSE_REQUEST
 } from '../action-types';
 import { getExpensesInitialState } from '../initial-state';
 
@@ -52,6 +56,17 @@ const expensesReducer = (state = getExpensesInitialState(), action) => {
         ...state,
         totalPages: action.totalPages
       };
+
+    case ADD_COMMENT_TO_EXPENSE_SUCCESS:
+      return state.map(expense => {
+        if (expense.id === action.expenseId) {
+          return {
+            ...expense,
+            comment: action.comment
+          };
+        }
+        return expense;
+      });
     default:
       return state;
   }
