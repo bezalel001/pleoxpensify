@@ -13,8 +13,13 @@ import { connect } from 'react-redux';
 import ExpenseListFilters from '../expense-list-filters';
 import ExpenseList from '../expense-list';
 import getVisibleExpenses from '../../selectors';
-import { setTotalNumberOfPages } from '../../state/expenses/actions';
+import {
+  fetchExpenses,
+  setTotalNumberOfPages,
+  setCurrrentPage
+} from '../../state/expenses/actions';
 import { LIMIT } from '../../utils/constants';
+import Pagination from '../pagination';
 
 class ExpensesHome extends Component {
   componentDidUpdate(preveProps) {
@@ -26,8 +31,23 @@ class ExpensesHome extends Component {
     }
   }
 
+  fetchExpenses = () => {
+    const { expenses, dispatch } = this.props;
+    const { page } = expenses;
+    dispatch(fetchExpenses({ limit: LIMIT, page: page || 1 }));
+  };
+
+  onPaginationClick = async direction => {
+    const { expenses, dispatch } = this.props;
+    const { page } = expenses;
+    const nextPage = direction === 'next' ? page + 1 : page - 1;
+    await dispatch(setCurrrentPage(nextPage));
+    this.fetchExpenses();
+  };
+
   render() {
     const { expenses } = this.props;
+    const { page, totalPages } = expenses;
     const data = expenses.expenses;
 
     return (
@@ -38,6 +58,11 @@ class ExpensesHome extends Component {
         <div className="expenses-home__expense-list">
           <ExpenseList expenses={data} />
         </div>
+        <Pagination
+          page={page}
+          totalPages={totalPages}
+          onPaginationClick={this.onPaginationClick}
+        />
       </div>
     );
   }
