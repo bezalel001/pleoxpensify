@@ -1,7 +1,10 @@
-const formatAmount = ({ currency, value }) => {
+import moment from 'moment';
+
+export const formatAmount = ({ currency, value }) => {
   return new Intl.NumberFormat('en-UK', {
     style: 'currency',
     currency
   }).format(value);
 };
-export default formatAmount;
+
+export const formatDate = date => moment(date).format('MMM Do, YYYY');

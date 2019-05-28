@@ -5,11 +5,12 @@
  */
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Route, Link } from 'react-router-dom';
 
 /**
  * Internal dependencies
  */
-import formatAmount from '../../utils/functions';
+import { formatAmount } from '../../utils/functions';
 
 /**
  * Style dependencies
@@ -17,15 +18,16 @@ import formatAmount from '../../utils/functions';
 import './style.scss';
 
 const ExpenseListItem = props => {
+  console.log(props);
   const { expense } = props;
   const { user, amount } = expense;
   const name = `${user.first} ${user.last}`;
   const formattedAmount = formatAmount(amount);
   return (
-    <div className="expense-list-item">
+    <Link to={`/expenses/${expense.id}`} className="expense-list-item">
       <span className="expense-list-item__user">{name}</span>
       <span className="expense-list-item__amount">{formattedAmount}</span>
-    </div>
+    </Link>
   );
 };
 ExpenseListItem.propTypes = {

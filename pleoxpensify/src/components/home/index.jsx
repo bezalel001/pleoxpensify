@@ -6,6 +6,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Route, Link } from 'react-router-dom';
+import { Container, Row, Col } from 'react-bootstrap';
 
 /**
  * Internal dependencies
@@ -20,6 +22,7 @@ import {
 } from '../../state/expenses/actions';
 import { LIMIT } from '../../utils/constants';
 import Pagination from '../pagination';
+import ExpenseDetail from '../expense-detail';
 
 class ExpensesHome extends Component {
   componentDidUpdate(preveProps) {
@@ -38,10 +41,11 @@ class ExpensesHome extends Component {
   };
 
   onPaginationClick = async direction => {
-    const { expenses, dispatch } = this.props;
+    const { expenses, dispatch, history } = this.props;
     const { page } = expenses;
     const nextPage = direction === 'next' ? page + 1 : page - 1;
     await dispatch(setCurrrentPage(nextPage));
+    history.push('/');
     this.fetchExpenses();
   };
 
@@ -51,19 +55,27 @@ class ExpensesHome extends Component {
     const data = expenses.expenses;
 
     return (
-      <div className="expenses-home">
-        <div className="expenses-home__expense-list-filters">
-          <ExpenseListFilters />
-        </div>
-        <div className="expenses-home__expense-list">
-          <ExpenseList expenses={data} />
-        </div>
-        <Pagination
-          page={page}
-          totalPages={totalPages}
-          onPaginationClick={this.onPaginationClick}
-        />
-      </div>
+      <Container className="expenses-home">
+        <Row>
+          <Col className="expenses-home__expenses">
+            <div className="expenses-home__expense-list-filters">
+              <ExpenseListFilters />
+            </div>
+            <div className="expenses-home__expense-list">
+              <ExpenseList expenses={data} />
+            </div>
+            <Pagination
+              page={page}
+              totalPages={totalPages}
+              onPaginationClick={this.onPaginationClick}
+            />
+          </Col>
+          <Col className="expenses-home__expense-details">
+            <h2>Details</h2>
+            {<Route path="/expenses/:id" component={ExpenseDetail} />}
+          </Col>
+        </Row>
+      </Container>
     );
   }
 }
