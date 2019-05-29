@@ -99,7 +99,10 @@ class ExpenseDetail extends Component {
                   key={receipt.url}
                 >
                   <a href={`http://localhost:3000${receipt.url}`}>
-                    Receipt-{index}
+                    <img
+                      src={`http://localhost:3000${receipt.url}`}
+                      alt="receipt"
+                    />
                   </a>
                 </div>
               );

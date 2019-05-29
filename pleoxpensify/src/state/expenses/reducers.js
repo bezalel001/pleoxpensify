@@ -75,7 +75,7 @@ const expensesReducer = (state = getExpensesInitialState(), action) => {
         ...state
       };
     case ADD_RECEIPT_TO_EXPENSE_SUCCESS:
-      return state.map(expense => {
+      return state.expenses.map(expense => {
         if (expense.id === action.expenseId) {
           console.log('Action', action.receipt);
           return {

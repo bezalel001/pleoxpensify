@@ -15,7 +15,7 @@ class ReceiptsDropzone extends Component {
       <div className="container">
         <Dropzone
           onDrop={this.onDrop}
-          accept="image/png, image/jpeg, application/pdf"
+          accept="image/png, image/jpeg"
           minSize={0}
           maxSize={maxSize}
           multiple={false}
