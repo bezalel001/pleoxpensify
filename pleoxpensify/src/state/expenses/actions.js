@@ -118,15 +118,13 @@ export const setTotalNumberOfPages = totalPages => {
 };
 
 /**
- * Returns an action object signalling that the request to add comment to expense
+ * Returns an action object signalling the request to add comment to expense
  *
- * @param  {Number}  expenseId Expense id
  * @return {Object}            Action object
  */
-export const addCommentToExpenseRequest = expenseId => {
+export const addCommentToExpenseRequest = () => {
   return {
-    type: ADD_COMMENT_TO_EXPENSE_REQUEST,
-    expenseId
+    type: ADD_COMMENT_TO_EXPENSE_REQUEST
   };
 };
 
@@ -160,8 +158,8 @@ export const addCommentToExpenseFailure = (expenseId, errorMessage) => {
 };
 
 /**
- * Returns an action thunk, dispatching progress of a request to retrieve expenses
- * for a page and limit options.
+ * Returns an action thunk, dispatching progress of a request to add comment to expense
+ * with a given id
  *
  * @param  {Number}   expenseId ExpenseId
  * @param  {String}   comment   Comment to be added
@@ -181,20 +179,48 @@ export const addCommentToExpense = (expenseId, comment) => async dispatch => {
   }
 };
 
+/**
+ * Returns an action object signalling the request to add receipt to expense
+ *
+ * @return {Object}            Action object
+ */
 export const addReceiptToExpenseRequest = () => ({
   type: ADD_RECEIPT_TO_EXPENSE_REQUEST
 });
 
-export const addReceiptToExpenseSuccess = receipt => ({
+/**
+ * Returns an action object signalling that comment has been successfully added to expense
+ *
+ * @param  {Number}  expenseId Expense id
+ * @param  {String}  receipt   Expense receipt url
+ * @return {Object}            Action object
+ */
+export const addReceiptToExpenseSuccess = (expenseId, receipt) => ({
   type: ADD_RECEIPT_TO_EXPENSE_SUCCESS,
+  expenseId,
   receipt
 });
 
+/**
+ * Returns an action object signalling that receipt could not be added to expense
+ *
+ * @param  {Number}  expenseId Expense id
+ * @param  {String}  error     Expense receipt error message
+ * @return {Object}            Action object
+ */
 export const addReceiptToExpenseFailure = error => ({
   type: ADD_RECEIPT_TO_EXPENSE_FAILURE,
   error
 });
 
+/**
+ * Returns an action thunk, dispatching progress of a request to add receipt to expense
+ * with a given id
+ *
+ * @param  {Number}   expenseId ExpenseId
+ * @param  {Object}   formData  Expense receipt form data
+ * @return {Function}           Action thunk
+ */
 export const addReceiptToExpense = (expenseId, formData) => async dispatch => {
   try {
     dispatch(addReceiptToExpenseRequest());
@@ -209,7 +235,7 @@ export const addReceiptToExpense = (expenseId, formData) => async dispatch => {
     );
     const receiptData = await response.data;
     const receiptUrl = await receiptData.url;
-    dispatch(addReceiptToExpenseSuccess(receiptUrl));
+    dispatch(addReceiptToExpenseSuccess(expenseId, receiptUrl));
   } catch (error) {
     dispatch(addReceiptToExpenseFailure(error));
   }
