@@ -3,7 +3,7 @@
 /**
  * Internal dependencies
  */
-import { arrowFunctionExpression } from '@babel/types';
+
 import {
   FETCH_EXPENSES_FAILURE,
   FETCH_EXPENSES_REQUEST,
@@ -12,7 +12,10 @@ import {
   SET_TOTAL_NUMBER_OF_PAGES,
   ADD_COMMENT_TO_EXPENSE_FAILURE,
   ADD_COMMENT_TO_EXPENSE_SUCCESS,
-  ADD_COMMENT_TO_EXPENSE_REQUEST
+  ADD_COMMENT_TO_EXPENSE_REQUEST,
+  ADD_RECEIPT_TO_EXPENSE_REQUEST,
+  ADD_RECEIPT_TO_EXPENSE_SUCCESS,
+  ADD_RECEIPT_TO_EXPENSE_FAILURE
 } from '../action-types';
 import { getExpensesInitialState } from '../initial-state';
 
@@ -67,6 +70,29 @@ const expensesReducer = (state = getExpensesInitialState(), action) => {
         }
         return expense;
       });
+    case ADD_RECEIPT_TO_EXPENSE_REQUEST:
+      return {
+        ...state
+      };
+    case ADD_RECEIPT_TO_EXPENSE_SUCCESS:
+      return state.map(expense => {
+        if (expense.id === action.expenseId) {
+          console.log('Action', action.receipt);
+          return {
+            ...expense,
+            receipts: [...expense.receipts, action.receipt]
+          };
+        }
+        return state;
+      });
+
+    case ADD_RECEIPT_TO_EXPENSE_FAILURE:
+      return {
+        ...state,
+
+        error: action.error,
+        didInvalidate: false
+      };
     default:
       return state;
   }

@@ -16,7 +16,10 @@ import {
   SET_TOTAL_NUMBER_OF_PAGES,
   ADD_COMMENT_TO_EXPENSE_FAILURE,
   ADD_COMMENT_TO_EXPENSE_REQUEST,
-  ADD_COMMENT_TO_EXPENSE_SUCCESS
+  ADD_COMMENT_TO_EXPENSE_SUCCESS,
+  ADD_RECEIPT_TO_EXPENSE_REQUEST,
+  ADD_RECEIPT_TO_EXPENSE_SUCCESS,
+  ADD_RECEIPT_TO_EXPENSE_FAILURE
 } from '../action-types';
 import { LIMIT, BASE_URL } from '../../utils/constants';
 
@@ -150,7 +153,7 @@ export const addCommentToExpenseSuccess = (expenseId, comment) => {
  */
 export const addCommentToExpenseFailure = (expenseId, errorMessage) => {
   return {
-    type: ADD_COMMENT_TO_EXPENSE_REQUEST,
+    type: ADD_COMMENT_TO_EXPENSE_FAILURE,
     expenseId,
     errorMessage
   };
@@ -175,5 +178,39 @@ export const addCommentToExpense = (expenseId, comment) => async dispatch => {
     dispatch(addCommentToExpenseSuccess(expenseId, data.comment));
   } catch (error) {
     dispatch(addCommentToExpenseFailure(expenseId, error));
+  }
+};
+
+export const addReceiptToExpenseRequest = () => ({
+  type: ADD_RECEIPT_TO_EXPENSE_REQUEST
+});
+
+export const addReceiptToExpenseSuccess = receipt => ({
+  type: ADD_RECEIPT_TO_EXPENSE_SUCCESS,
+  receipt
+});
+
+export const addReceiptToExpenseFailure = error => ({
+  type: ADD_RECEIPT_TO_EXPENSE_FAILURE,
+  error
+});
+
+export const addReceiptToExpense = (expenseId, formData) => async dispatch => {
+  try {
+    dispatch(addReceiptToExpenseRequest());
+    const response = await axios.post(
+      `${BASE_URL}/${expenseId}/receipts`,
+      formData,
+      {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      }
+    );
+    const receiptData = await response.data;
+    const receiptUrl = await receiptData.url;
+    dispatch(addReceiptToExpenseSuccess(receiptUrl));
+  } catch (error) {
+    dispatch(addReceiptToExpenseFailure(error));
   }
 };
