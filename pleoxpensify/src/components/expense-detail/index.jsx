@@ -12,7 +12,11 @@ import { connect } from 'react-redux';
  */
 import { formatAmount, formatDate } from '../../utils/functions';
 import CommentForm from '../expense-comment';
-import { addCommentToExpense } from '../../state/expenses/actions';
+import {
+  addCommentToExpense,
+  addReceiptToExpense
+} from '../../state/expenses/actions';
+import ReceiptForm from '../expense-receipts';
 
 /**
  * Style dependencies
@@ -37,10 +41,21 @@ class ExpenseDetail extends Component {
     this.setState({ isAddingComment: false });
   };
 
+  onReceiptSubmit = async fileInput => {
+    const { expense, dispatch } = this.props;
+    const { id } = expense;
+    const receipt = new FormData();
+
+    receipt.append('receipt', fileInput.files[0]);
+
+    await dispatch(addReceiptToExpense(id, receipt));
+  };
+
   render() {
     const { expense } = this.props;
     const { user, amount, date, comment, receipts, merchant } = expense;
     const { isAddingComment } = this.state;
+
     return (
       <div className="expense-detail">
         <div className="expense-detail__merchant">{merchant}</div>
@@ -89,6 +104,9 @@ class ExpenseDetail extends Component {
                 </div>
               );
             })}
+          <div className="expense-detail__receipts--form">
+            <ReceiptForm onSubmit={this.onReceiptSubmit} />
+          </div>
         </div>
       </div>
     );

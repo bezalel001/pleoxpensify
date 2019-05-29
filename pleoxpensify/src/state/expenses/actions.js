@@ -223,9 +223,10 @@ export const addReceiptToExpenseFailure = error => ({
  */
 export const addReceiptToExpense = (expenseId, formData) => async dispatch => {
   try {
+    console.log('Receipt request', formData);
     dispatch(addReceiptToExpenseRequest());
     const response = await axios.post(
-      `${BASE_URL}/${expenseId}/receipts`,
+      `http://localhost:3000/expenses/${expenseId}/receipts`,
       formData,
       {
         headers: {
@@ -233,10 +234,13 @@ export const addReceiptToExpense = (expenseId, formData) => async dispatch => {
         }
       }
     );
+    console.log('Receipt response', response);
     const receiptData = await response.data;
     const receiptUrl = await receiptData.url;
+    console.log('Receipt add', receiptUrl);
     dispatch(addReceiptToExpenseSuccess(expenseId, receiptUrl));
   } catch (error) {
+    console.log('Receipt error', error);
     dispatch(addReceiptToExpenseFailure(error));
   }
 };
