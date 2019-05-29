@@ -39,7 +39,7 @@ class ExpenseListFilters extends Component {
 
   onDatesChange = ({ startDate, endDate }) => {
     const { dispatch } = this.props;
-    console.log('filter start date', startDate);
+
     dispatch(setFilterStartDate(startDate));
     dispatch(setFilterEndDate(endDate));
   };

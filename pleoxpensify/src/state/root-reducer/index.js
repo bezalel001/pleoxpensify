@@ -4,6 +4,7 @@
  * External dependencies
  */
 import { combineReducers } from 'redux';
+import { reducer as formReducer } from 'redux-form';
 
 /**
  * Internal dependencies
@@ -16,6 +17,7 @@ import filtersReducer from '../filters/reducers';
  */
 const rootReducer = combineReducers({
   expenses: expensesReducer,
-  filters: filtersReducer
+  filters: filtersReducer,
+  form: formReducer
 });
 export default rootReducer;

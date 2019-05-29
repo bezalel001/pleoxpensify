@@ -167,8 +167,11 @@ export const addCommentToExpenseFailure = (expenseId, errorMessage) => {
 export const addCommentToExpense = (expenseId, comment) => async dispatch => {
   try {
     dispatch(addCommentToExpenseRequest(expenseId));
-    const response = await axios.post(`${BASE_URL}/${expenseId}`, comment);
+    const response = await axios.post(`${BASE_URL}/${expenseId}`, {
+      comment
+    });
     const data = await response.data;
+
     dispatch(addCommentToExpenseSuccess(expenseId, data.comment));
   } catch (error) {
     dispatch(addCommentToExpenseFailure(expenseId, error));

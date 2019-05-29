@@ -18,7 +18,6 @@ import { formatAmount } from '../../utils/functions';
 import './style.scss';
 
 const ExpenseListItem = props => {
-  console.log(props);
   const { expense } = props;
   const { user, amount } = expense;
   const name = `${user.first} ${user.last}`;
