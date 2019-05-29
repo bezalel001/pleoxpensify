@@ -189,7 +189,7 @@ export const addReceiptToExpenseRequest = () => ({
 });
 
 /**
- * Returns an action object signalling that comment has been successfully added to expense
+ * Returns an action object signalling that receipt has been successfully added to expense
  *
  * @param  {Number}  expenseId Expense id
  * @param  {String}  receipt   Expense receipt url
