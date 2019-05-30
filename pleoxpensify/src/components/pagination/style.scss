@@ -1,0 +1,36 @@
+.pagination {
+  margin: 2rem 30% 2rem 30%;
+  text-align: center;
+  width: 40%;
+
+  &__button {
+    text-align: center;
+    border: none;
+    border-radius: 16px;
+    background-color: #28b9b5;
+    transition: background-color 0.2s;
+    color: white;
+    cursor: pointer;
+    margin: 10px;
+    width: 44px;
+    height: 34px;
+
+    &:hover {
+      background-color: #247771;
+    }
+
+    &:focus {
+      outline: none;
+    }
+
+    &:disabled {
+      background-color: #1f364d;
+      cursor: not-allowed;
+    }
+  }
+
+  &__info {
+    margin-top: 17px;
+    font-size: 12px;
+  }
+}

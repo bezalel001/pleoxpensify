@@ -22,6 +22,11 @@ import {
   setFilterStartDate
 } from '../../state/filters/actions';
 
+/**
+ * Style dependencies
+ */
+import './style.scss';
+
 class ExpenseListFilters extends Component {
   static propTypes = {
     filters: PropTypes.shape({
@@ -63,12 +68,15 @@ class ExpenseListFilters extends Component {
           onChange={e => {
             dispatch(setFilterText(e.target.value));
           }}
+          className="expense-list-filters__search-text"
+          placeholder="Search Expenses"
         />
         <select
           value={filterCurrency}
           onChange={e => {
             dispatch(setFilterCurrency(e.target.value));
           }}
+          className="expense-list-filters__select-currency"
         >
           <option value="">Currencies</option>
           <option value="DKK">DKK</option>

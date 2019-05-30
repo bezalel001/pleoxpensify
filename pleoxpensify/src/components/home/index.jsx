@@ -24,6 +24,11 @@ import { LIMIT } from '../../utils/constants';
 import Pagination from '../pagination';
 import ExpenseDetail from '../expense-detail';
 
+/**
+ * Style dependencies
+ */
+import './style.scss';
+
 class ExpensesHome extends Component {
   componentDidUpdate(preveProps) {
     const { expenses, dispatch } = this.props;
@@ -71,7 +76,6 @@ class ExpensesHome extends Component {
             />
           </Col>
           <Col className="expenses-home__expense-details">
-            <h2>Details</h2>
             {<Route path="/expenses/:id" component={ExpenseDetail} />}
           </Col>
         </Row>

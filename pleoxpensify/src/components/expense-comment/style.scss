@@ -1,0 +1,18 @@
+.comment-expense-input {
+  border: 1px solid #e7e7e7;
+  background-color: #fff;
+  color: inherit;
+  font-family: inherit;
+  font-size: 14px;
+  padding: 12px 15px;
+  margin-right: 10px;
+  border-radius: 5px;
+  width: 100%;
+  transition: border 0.3s;
+  margin-bottom: 1rem;
+
+  &:focus {
+    outline: none;
+    border: 1px solid #28b9b5;
+  }
+}

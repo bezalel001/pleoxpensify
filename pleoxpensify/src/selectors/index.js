@@ -27,11 +27,11 @@ const validateFilterEndDateOption = (createDate, filterEndDate) => {
  */
 const getVisibleExpenses = (expensesObject, filters) => {
   console.log('Expenses filter object', expensesObject);
-  let { expenses } = expensesObject;
-  if (Array.isArray(expensesObject)) {
-    expenses = expensesObject;
-  }
-
+  // let { expenses } = expensesObject;
+  // if (Array.isArray(expensesObject)) {
+  //   expenses = expensesObject;
+  // }
+  const { expenses } = expensesObject;
   const {
     filterText,
     filterCurrency,

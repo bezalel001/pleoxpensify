@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Dropzone from 'react-dropzone';
+import './style.scss';
 
 class ReceiptsDropzone extends Component {
   onDrop = acceptedFiles => {
@@ -8,11 +9,11 @@ class ReceiptsDropzone extends Component {
   };
 
   render() {
-    const maxSize = 1048576;
+    const maxSize = 100485768;
     console.log('files props', this.props);
 
     return (
-      <div className="container">
+      <div className="receipts-dropzone">
         <Dropzone
           onDrop={this.onDrop}
           accept="image/png, image/jpeg"
@@ -32,7 +33,7 @@ class ReceiptsDropzone extends Component {
               rejectedFiles.length > 0 && rejectedFiles[0].size > maxSize;
             console.log('get input props', getInputProps());
             return (
-              <div {...getRootProps()}>
+              <div {...getRootProps()} className="receipts-dropzone__content">
                 <ul className="list-group mt-2">
                   {acceptedFiles.length > 0 &&
                     acceptedFiles.map(acceptedFile => (
@@ -45,7 +46,7 @@ class ReceiptsDropzone extends Component {
                     ))}
                 </ul>
                 <input {...getInputProps()} name="receipt" />
-                {!isDragActive && 'Click here or drop a file to upload'}
+                {!isDragActive && <ion-icon size="large" name="add" />}
                 {isDragActive && !isDragReject && 'Drop it like its hot!'}
                 {isDragReject && 'File type not accepted, sorry!'}
                 {isFileTooLarge && (

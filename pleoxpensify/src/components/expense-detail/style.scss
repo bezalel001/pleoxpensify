@@ -1,3 +1,155 @@
 .expense-detail {
-  font-size: 120%;
+  &__title {
+    text-transform: uppercase;
+    font-size: 18px;
+    font-weight: 400;
+    margin: 5rem 0;
+    width: 10%;
+  }
+
+  &__merchant {
+    font-size: 150%;
+    font-weight: 200;
+    background-color: #28b9b5;
+    color: #fff;
+    width: 50%;
+
+    margin: 0 auto;
+    text-align: center;
+    padding-bottom: 2px;
+    border-radius: 1rem;
+  }
+
+  &__amount {
+    font-size: 150%;
+    font-weight: 400;
+    border-radius: 1rem;
+    background-color: #ff3366;
+    width: 50%;
+    margin: 0 auto;
+    color: #fff;
+
+    text-align: center;
+    margin-top: 2rem;
+    margin-bottom: 4rem;
+    padding-top: 0;
+
+    &--icon {
+      padding-top: 5px;
+      padding-block: 5px;
+      display: inline-block;
+    }
+  }
+
+  &__description {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: flex-start;
+    margin: 5rem 0 5rem 0;
+  }
+
+  &__receipts {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-content: stretch;
+
+    &--item {
+      height: 12rem;
+      width: 12rem;
+      border-radius: 50%;
+
+      &-image {
+        height: 100%;
+        width: 100%;
+        border-radius: 50%;
+      }
+    }
+  }
+
+  &__user-name {
+    display: flex;
+    margin-top: 1rem;
+
+    &--icon {
+      flex: 1 0 20%;
+      font-size: 120%;
+      margin-right: 2rem;
+    }
+
+    &--first,
+    &--last {
+      flex: 1 0 60%;
+      font-weight: 600;
+    }
+  }
+
+  &__user-email {
+    display: flex;
+    margin-top: 1rem;
+
+    &--icon {
+      flex: 1 0 20%;
+      font-size: 120%;
+      margin-right: 2rem;
+    }
+
+    &--address {
+      position: absolute;
+      left: 5rem;
+    }
+  }
+
+  &__date {
+    display: flex;
+    margin-top: 1rem;
+
+    &--icon {
+      flex: 1 0 20%;
+      font-size: 120%;
+      margin-right: 2rem;
+    }
+
+    &--format {
+      margin-left: 1rem;
+      position: absolute;
+      left: 5rem;
+    }
+  }
+
+  &__comment {
+    margin-top: 1rem;
+    margin: 0 auto;
+    margin-bottom: 1rem;
+
+    &--text {
+      font-family: 'Indie Flower', cursive;
+      font-weight: 600;
+      background-color: #efefef;
+      font-size: 110%;
+      color: #28b9b5;
+    }
+
+    &--add {
+      margin: 4rem 0 2rem 0;
+      display: flex;
+
+      &:focus {
+        outline: none;
+      }
+
+      &--icon {
+        flex: 1 0 20%;
+        font-size: 120%;
+        margin-right: 2rem;
+      }
+
+      &--text {
+        position: absolute;
+        left: 5rem;
+      }
+    }
+  }
 }

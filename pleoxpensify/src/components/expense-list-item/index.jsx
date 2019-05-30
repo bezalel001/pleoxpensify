@@ -5,7 +5,7 @@
  */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Route, Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 /**
  * Internal dependencies
@@ -20,13 +20,20 @@ import './style.scss';
 const ExpenseListItem = props => {
   const { expense } = props;
   const { user, amount } = expense;
+
   const name = `${user.first} ${user.last}`;
   const formattedAmount = formatAmount(amount);
   return (
-    <Link to={`/expenses/${expense.id}`} className="expense-list-item">
-      <span className="expense-list-item__user">{name}</span>
-      <span className="expense-list-item__amount">{formattedAmount}</span>
-    </Link>
+    <div className="expense-list-item">
+      <NavLink
+        to={`/expenses/${expense.id}`}
+        className="expense-list-item"
+        style={{ textDecoration: 'none' }}
+      >
+        <div className="expense-list-item__user">{name}</div>
+        <div className="expense-list-item__amount">{formattedAmount}</div>
+      </NavLink>
+    </div>
   );
 };
 ExpenseListItem.propTypes = {

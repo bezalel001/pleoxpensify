@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import { reduxForm, Field } from 'redux-form';
 
 import ReceiptsDropzone from './receipts-dropzone';
-// import { addReceiptToExpense } from '../../state/expenses/actions';
+
+import './style.scss';
 
 const FILE_FIELD_NAME = 'files';
 
@@ -13,13 +14,14 @@ const ReceiptForm = props => {
     <div>
       <form onSubmit={handleSubmit} className="form-group">
         <div>
-          <label htmlFor={FILE_FIELD_NAME}>Files</label>
           <Field name={FILE_FIELD_NAME} component={ReceiptsDropzone} />
         </div>
-        <div>
-          <button type="submit">Submit</button>
-          <button type="button" onClick={reset}>
-            Clear Values
+        <div className="btn">
+          <button type="submit" className="btn__submit">
+            <ion-icon name="checkbox-outline" />
+          </button>
+          <button type="button" className="btn__cancel" onClick={reset}>
+            <ion-icon name="close" />
           </button>
         </div>
       </form>

@@ -1,0 +1,52 @@
+.expense-list-filters {
+  display: flex;
+  margin: 2rem 0 5rem 0;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  padding: 14px;
+  border-bottom: 1px solid #e7e7e7;
+  background-color: #f7f7f7;
+
+  &__search-text {
+    border: 1px solid #e7e7e7;
+    background-color: #fff;
+    color: inherit;
+    font-family: inherit;
+    font-size: 14px;
+    padding: 12px 15px;
+    margin-right: 10px;
+    border-radius: 5px;
+    width: 60%;
+    transition: border 0.3s;
+    margin-bottom: 1rem;
+
+    &:focus {
+      outline: none;
+      border: 1px solid #28b9b5;
+    }
+  }
+
+  &__select-currency {
+    width: 22%;
+    border: 1px solid #e7e7e7;
+    height: 44px;
+    font-size: 18px;
+    color: inherit;
+    background-color: #fff;
+    margin-right: 10px;
+    font-weight: 300;
+    transition: border 0.3s;
+    margin-bottom: 1rem;
+
+    &:focus {
+      outline: none;
+      border: 1px solid #28b9b5;
+    }
+  }
+
+  &__pick-date {
+    margin-top: 5rem;
+  }
+}

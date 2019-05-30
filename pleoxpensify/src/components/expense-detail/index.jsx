@@ -25,12 +25,18 @@ import './style.scss';
 
 class ExpenseDetail extends Component {
   state = {
-    isAddingComment: false
+    isAddingComment: false,
+    isUploadingReceipt: false
   };
 
   toggleAddComment = () => {
     const { isAddingComment } = this.state;
     return this.setState({ isAddingComment: !isAddingComment });
+  };
+
+  toggleUploadReceipt = () => {
+    const { isUploadingReceipt } = this.state;
+    return this.setState({ isUploadingReceipt: !isUploadingReceipt });
   };
 
   onCommentSubmit = commentFormvalue => {
@@ -58,37 +64,72 @@ class ExpenseDetail extends Component {
 
     return (
       <div className="expense-detail">
-        <div className="expense-detail__merchant">{merchant}</div>
-        <div className="expense-detail__amount">{formatAmount(amount)}</div>
-        <div className="expense-detail__user">
-          <span className="expense-detail__user--first">{user.first}</span>
-          <span className="expense-detail__user--first">{user.last}</span>
+        <h2 className="expense-detail__title">Details</h2>
+        <div className="expense-detail__description">
+          <div className="expense-detail__merchant">{merchant}</div>
+          <div className="expense-detail__amount">
+            <span className="expense-detail__amount--icon">
+              <ion-icon name="remove" />
+            </span>
 
-          <div className="expense-detail__user--email">{user.email}</div>
-        </div>
-        <div className="expense-detail__date">{formatDate(date)}</div>
-        <div className="expense-detail__comment">
-          <div className="expense-detail__comment--text">{comment}</div>
-          <div
-            onClick={this.toggleAddComment}
-            onKeyDown={this.toggleAddComment}
-            role="button"
-            tabIndex={0}
-            className="expense-detail__comment--add"
-          >
-            Add comment
+            {formatAmount(amount)}
           </div>
-          {isAddingComment && (
-            <div className="expense-detail__comment--form">
-              <CommentForm onSubmit={this.onCommentSubmit} />
-              <button
-                type="button"
-                onClick={() => this.setState({ isAddingComment: false })}
-              >
-                Cancel
-              </button>
+          <div className="expense-detail__comment">
+            <div className="expense-detail__comment--text">{comment}</div>
+          </div>
+          <div className="expense-detail__user">
+            <div className="expense-detail__user-name">
+              <div className="expense-detail__user-name--icon">
+                <ion-icon name="person" />
+              </div>
+              <div className="expense-detail__user-name--first">
+                {user.first}
+              </div>
+              <div className="expense-detail__user-name--last">{user.last}</div>
             </div>
-          )}
+            <div className="expense-detail__user-email">
+              <div className="expense-detail__user-email--icon">
+                <ion-icon name="mail" />
+              </div>
+              <div className="expense-detail__user-email--address">
+                {user.email}
+              </div>
+            </div>
+          </div>
+          <div className="expense-detail__date">
+            <div className="expense-detail__date--icon">
+              <ion-icon name="calendar" />
+            </div>
+            <div className="expense-detail__date--format">
+              {formatDate(date)}
+            </div>
+          </div>
+
+          <div className="expense-detail__comment-form">
+            <div
+              onClick={this.toggleAddComment}
+              onKeyDown={this.toggleAddComment}
+              role="button"
+              tabIndex={0}
+              className="expense-detail__comment--add"
+            >
+              <div className="expense-detail__comment--add--icon">
+                <ion-icon name="create" />
+              </div>
+              <div className="expense-detail__comment--add--text">Comment</div>
+            </div>
+            {isAddingComment && (
+              <div className="expense-detail__comment--form">
+                <CommentForm onSubmit={this.onCommentSubmit} />
+                <button
+                  type="button"
+                  onClick={() => this.setState({ isAddingComment: false })}
+                >
+                  Cancel
+                </button>
+              </div>
+            )}
+          </div>
         </div>
         <div className="expense-detail__receipts">
           {receipts &&
@@ -100,6 +141,7 @@ class ExpenseDetail extends Component {
                 >
                   <a href={`http://localhost:3000${receipt.url}`}>
                     <img
+                      className=" expense-detail__receipts--item-image"
                       src={`http://localhost:3000${receipt.url}`}
                       alt="receipt"
                     />
@@ -107,8 +149,10 @@ class ExpenseDetail extends Component {
                 </div>
               );
             })}
-          <div className="expense-detail__receipts--form">
-            <ReceiptForm onSubmit={this.onReceiptSubmit} />
+          <div className="expense-detail__receipts--item">
+            <div className=" expense-detail__receipts--form">
+              <ReceiptForm onSubmit={this.onReceiptSubmit} />
+            </div>
           </div>
         </div>
       </div>
