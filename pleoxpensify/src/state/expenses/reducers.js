@@ -18,6 +18,7 @@ import {
   ADD_RECEIPT_TO_EXPENSE_FAILURE
 } from '../action-types';
 import { getExpensesInitialState } from '../initial-state';
+import { status } from '../../utils/constants';
 
 /**
  * `Reducer` function which handles expense-related actions
@@ -65,7 +66,8 @@ const expensesReducer = (state = getExpensesInitialState(), action) => {
         ...state,
         isLoading: true,
         error: null,
-        didInvalidate: false
+        didInvalidate: false,
+        saveStatus: status.SAVING
       };
 
     case ADD_COMMENT_TO_EXPENSE_SUCCESS: {
@@ -83,7 +85,8 @@ const expensesReducer = (state = getExpensesInitialState(), action) => {
         expenses: [...expenses],
         isLoading: false,
         error: null,
-        didInvalidate: false
+        didInvalidate: false,
+        saveStatus: status.SUCCESS
       };
     }
     case ADD_COMMENT_TO_EXPENSE_FAILURE:
@@ -91,13 +94,15 @@ const expensesReducer = (state = getExpensesInitialState(), action) => {
         ...state,
         isLoading: false,
         error: action.errorMessage,
-        didInvalidate: true
+        didInvalidate: true,
+        saveStatus: status.ERROR
       };
 
     case ADD_RECEIPT_TO_EXPENSE_REQUEST:
       return {
         ...state,
-        isLoading: true
+        isLoading: true,
+        saveStatus: status.SAVING
       };
     case ADD_RECEIPT_TO_EXPENSE_SUCCESS: {
       const expenses = state.expenses.map(expense => {
@@ -114,7 +119,8 @@ const expensesReducer = (state = getExpensesInitialState(), action) => {
         expenses: [...expenses],
         isLoading: false,
         error: null,
-        didInvalidate: false
+        didInvalidate: false,
+        saveStatus: status.SUCCESS
       };
     }
 
@@ -123,7 +129,8 @@ const expensesReducer = (state = getExpensesInitialState(), action) => {
         ...state,
         isLoading: false,
         error: action.error,
-        didInvalidate: false
+        didInvalidate: false,
+        saveStatus: status.ERROR
       };
     default:
       return state;

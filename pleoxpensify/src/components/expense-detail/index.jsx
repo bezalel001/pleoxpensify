@@ -182,7 +182,11 @@ const mapStateToProps = (state, ownProps) => {
   );
 
   return {
-    expense
+    expense,
+    isLoading: expenses.isLoading,
+    error: expenses.error,
+    didInvalidate: expenses.didInvalidate,
+    saveStatus: expenses.saveStatus
   };
 };
 

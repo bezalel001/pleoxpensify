@@ -1,3 +1,5 @@
+import { status } from '../utils/constants';
+
 export const getExpensesInitialState = () => {
   return {
     expenses: [],
@@ -7,7 +9,8 @@ export const getExpensesInitialState = () => {
     totalPages: 0,
     page: 1,
     error: null,
-    refresh: false
+    refresh: false,
+    saveStatus: status.READY
   };
 };
 
