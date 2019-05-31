@@ -146,13 +146,12 @@ export const addCommentToExpenseSuccess = (expenseId, comment) => {
 /**
  * Returns an action object signalling that comment could not be added to expense
  *
- * @param  {Number}  expenseId Expense id
- * @return {Object}            Action object
+ * @param  {Number}  errorMessage Error message
+ * @return {Object}               Action object
  */
-export const addCommentToExpenseFailure = (expenseId, errorMessage) => {
+export const addCommentToExpenseFailure = errorMessage => {
   return {
     type: ADD_COMMENT_TO_EXPENSE_FAILURE,
-    expenseId,
     errorMessage
   };
 };
@@ -167,7 +166,7 @@ export const addCommentToExpenseFailure = (expenseId, errorMessage) => {
  */
 export const addCommentToExpense = (expenseId, comment) => async dispatch => {
   try {
-    dispatch(addCommentToExpenseRequest(expenseId));
+    dispatch(addCommentToExpenseRequest());
     const response = await axios.post(`${BASE_URL}/${expenseId}`, {
       comment
     });
@@ -175,7 +174,7 @@ export const addCommentToExpense = (expenseId, comment) => async dispatch => {
 
     dispatch(addCommentToExpenseSuccess(expenseId, data.comment));
   } catch (error) {
-    dispatch(addCommentToExpenseFailure(expenseId, error));
+    dispatch(addCommentToExpenseFailure(error));
   }
 };
 
@@ -204,7 +203,6 @@ export const addReceiptToExpenseSuccess = (expenseId, receipt) => ({
 /**
  * Returns an action object signalling that receipt could not be added to expense
  *
- * @param  {Number}  expenseId Expense id
  * @param  {String}  error     Expense receipt error message
  * @return {Object}            Action object
  */
@@ -223,7 +221,6 @@ export const addReceiptToExpenseFailure = error => ({
  */
 export const addReceiptToExpense = (expenseId, formData) => async dispatch => {
   try {
-    console.log('Receipt request', formData);
     dispatch(addReceiptToExpenseRequest());
     const response = await axios.post(
       `http://localhost:3000/expenses/${expenseId}/receipts`,
@@ -234,15 +231,14 @@ export const addReceiptToExpense = (expenseId, formData) => async dispatch => {
         }
       }
     );
-    console.log('Receipt response', response);
+
     const receiptData = await response.data;
     const receiptUrl = await receiptData.url;
-    console.log('Receipt add', receiptUrl);
+
     if (receiptUrl) {
       dispatch(addReceiptToExpenseSuccess(expenseId, receiptUrl));
     }
   } catch (error) {
-    console.log('Receipt error', error);
     dispatch(addReceiptToExpenseFailure(error));
   }
 };

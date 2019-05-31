@@ -60,8 +60,16 @@ const expensesReducer = (state = getExpensesInitialState(), action) => {
         totalPages: action.totalPages
       };
 
-    case ADD_COMMENT_TO_EXPENSE_SUCCESS:
-      return state.map(expense => {
+    case ADD_COMMENT_TO_EXPENSE_REQUEST:
+      return {
+        ...state,
+        isLoading: true,
+        error: null,
+        didInvalidate: false
+      };
+
+    case ADD_COMMENT_TO_EXPENSE_SUCCESS: {
+      const expenses = state.map(expense => {
         if (expense.id === action.expenseId) {
           return {
             ...expense,
@@ -70,14 +78,30 @@ const expensesReducer = (state = getExpensesInitialState(), action) => {
         }
         return expense;
       });
+      return {
+        ...state,
+        expenses: [...expenses],
+        isLoading: false,
+        error: null,
+        didInvalidate: false
+      };
+    }
+    case ADD_COMMENT_TO_EXPENSE_FAILURE:
+      return {
+        ...state,
+        isLoading: false,
+        error: action.errorMessage,
+        didInvalidate: true
+      };
+
     case ADD_RECEIPT_TO_EXPENSE_REQUEST:
       return {
-        ...state
+        ...state,
+        isLoading: true
       };
     case ADD_RECEIPT_TO_EXPENSE_SUCCESS: {
       const expenses = state.expenses.map(expense => {
         if (expense.id === action.expenseId) {
-          console.log('Action', action.receipt);
           return {
             ...expense,
             receipts: [...expense.receipts, action.receipt]
@@ -85,17 +109,19 @@ const expensesReducer = (state = getExpensesInitialState(), action) => {
         }
         return expense;
       });
-      console.log('expenses in reducer', expenses);
       return {
         ...state,
-        expenses: [...expenses]
+        expenses: [...expenses],
+        isLoading: false,
+        error: null,
+        didInvalidate: false
       };
     }
 
     case ADD_RECEIPT_TO_EXPENSE_FAILURE:
       return {
         ...state,
-
+        isLoading: false,
         error: action.error,
         didInvalidate: false
       };
