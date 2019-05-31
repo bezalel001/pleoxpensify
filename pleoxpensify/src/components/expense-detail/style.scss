@@ -12,22 +12,22 @@
     font-weight: 200;
     background-color: #28b9b5;
     color: #fff;
-    width: 50%;
-
+    width: 15rem;
+    height: 15rem;
     margin: 0 auto;
     text-align: center;
-    padding-bottom: 2px;
-    border-radius: 1rem;
+    text-transform: capitalize;
+    border-radius: 50%;
+    padding: 6rem 1rem 1rem 1rem;
   }
 
   &__amount {
-    font-size: 150%;
-    font-weight: 400;
-    border-radius: 1rem;
-    background-color: #ff3366;
+    font-size: 110%;
+    font-weight: 600;
+
     width: 50%;
     margin: 0 auto;
-    color: #fff;
+    color: #ff3366;
 
     text-align: center;
     margin-top: 2rem;
@@ -57,14 +57,15 @@
     align-content: stretch;
 
     &--item {
-      height: 12rem;
-      width: 12rem;
-      border-radius: 50%;
+      height: 15rem;
+      width: 15rem;
+      border-radius: 0.5rem;
+      margin: 3px;
 
       &-image {
         height: 100%;
         width: 100%;
-        border-radius: 50%;
+        border-radius: 0.5rem;
       }
     }
   }

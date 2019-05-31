@@ -59,6 +59,7 @@ class ExpenseDetail extends Component {
 
   render() {
     const { expense } = this.props;
+
     const { user, amount, date, comment, receipts, merchant } = expense;
     const { isAddingComment } = this.state;
 
@@ -66,7 +67,9 @@ class ExpenseDetail extends Component {
       <div className="expense-detail">
         <h2 className="expense-detail__title">Details</h2>
         <div className="expense-detail__description">
-          <div className="expense-detail__merchant">{merchant}</div>
+          <div className="expense-detail__merchant">
+            {merchant.toLowerCase()}
+          </div>
           <div className="expense-detail__amount">
             <span className="expense-detail__amount--icon">
               <ion-icon name="remove" />
@@ -121,19 +124,14 @@ class ExpenseDetail extends Component {
             {isAddingComment && (
               <div className="expense-detail__comment--form">
                 <CommentForm onSubmit={this.onCommentSubmit} />
-                <button
-                  type="button"
-                  onClick={() => this.setState({ isAddingComment: false })}
-                >
-                  Cancel
-                </button>
               </div>
             )}
           </div>
         </div>
         <div className="expense-detail__receipts">
-          {receipts &&
+          {receipts.length > 0 &&
             receipts.map((receipt, index) => {
+              console.log('individual', receipt);
               return (
                 <div
                   className="expense-detail__receipts--item"
@@ -160,19 +158,21 @@ class ExpenseDetail extends Component {
   }
 }
 ExpenseDetail.propTypes = {
-  user: PropTypes.shape({
-    first: PropTypes.string.isRequired,
-    last: PropTypes.string.isRequired,
-    email: PropTypes.string.isRequired
-  }).isRequired,
-  amount: PropTypes.shape({
-    currency: PropTypes.string.isRequired,
-    value: PropTypes.number.isRequired
-  }).isRequired,
-  date: PropTypes.string.isRequired,
-  merchant: PropTypes.string.isRequired,
-  comment: PropTypes.string.isRequired,
-  receipts: PropTypes.arrayOf(PropTypes.object).isRequired
+  expense: PropTypes.shape({
+    user: PropTypes.shape({
+      first: PropTypes.string.isRequired,
+      last: PropTypes.string.isRequired,
+      email: PropTypes.string.isRequired
+    }).isRequired,
+    amount: PropTypes.shape({
+      currency: PropTypes.string.isRequired,
+      value: PropTypes.string.isRequired
+    }).isRequired,
+    date: PropTypes.string.isRequired,
+    merchant: PropTypes.string.isRequired,
+    comment: PropTypes.string.isRequired,
+    receipts: PropTypes.arrayOf(PropTypes.object).isRequired
+  }).isRequired
 };
 
 const mapStateToProps = (state, ownProps) => {

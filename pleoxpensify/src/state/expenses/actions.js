@@ -238,7 +238,9 @@ export const addReceiptToExpense = (expenseId, formData) => async dispatch => {
     const receiptData = await response.data;
     const receiptUrl = await receiptData.url;
     console.log('Receipt add', receiptUrl);
-    dispatch(addReceiptToExpenseSuccess(expenseId, receiptUrl));
+    if (receiptUrl) {
+      dispatch(addReceiptToExpenseSuccess(expenseId, receiptUrl));
+    }
   } catch (error) {
     console.log('Receipt error', error);
     dispatch(addReceiptToExpenseFailure(error));

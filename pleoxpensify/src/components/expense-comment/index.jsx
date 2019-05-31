@@ -31,23 +31,34 @@ const renderField = ({
 );
 
 const CommentForm = props => {
-  const { handleSubmit, submitting } = props;
+  const { handleSubmit, submitting, reset } = props;
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
+    <div className="comment">
+      <form onSubmit={handleSubmit} className="comment__form">
         <Field
           name="expenseComment"
           component={renderField}
           type="text"
           label="Comment"
           validate={required}
-          className="comment-expense-input"
+          className="comment__form--input"
           autoComplete="off"
         />
 
-        <div>
-          <button type="submit" disabled={submitting}>
-            Submit
+        <div className="comment__form--btn">
+          <button
+            type="submit"
+            disabled={submitting}
+            className="comment__form--btn-submit"
+          >
+            <ion-icon name="checkbox-outline" />
+          </button>
+          <button
+            type="button"
+            className="comment__form--btn-cancel"
+            onClick={reset}
+          >
+            <ion-icon name="close" />
           </button>
         </div>
       </form>

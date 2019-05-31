@@ -46,7 +46,13 @@ class ReceiptsDropzone extends Component {
                     ))}
                 </ul>
                 <input {...getInputProps()} name="receipt" />
-                {!isDragActive && <ion-icon size="large" name="add" />}
+                {!isDragActive && (
+                  <ion-icon
+                    size="large"
+                    name="add"
+                    className="receipts-dropzone__content--icon"
+                  />
+                )}
                 {isDragActive && !isDragReject && 'Drop it like its hot!'}
                 {isDragReject && 'File type not accepted, sorry!'}
                 {isFileTooLarge && (
