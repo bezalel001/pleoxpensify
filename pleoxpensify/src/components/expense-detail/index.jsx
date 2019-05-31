@@ -71,11 +71,12 @@ class ExpenseDetail extends Component {
             {merchant.toLowerCase()}
           </div>
           <div className="expense-detail__amount">
-            <span className="expense-detail__amount--icon">
+            <div className="expense-detail__amount--icon">
               <ion-icon name="remove" />
-            </span>
-
-            {formatAmount(amount)}
+            </div>
+            <div className="expense-detail__amount--value">
+              {formatAmount(amount)}
+            </div>
           </div>
           <div className="expense-detail__comment">
             <div className="expense-detail__comment--text">{comment}</div>
@@ -130,8 +131,7 @@ class ExpenseDetail extends Component {
         </div>
         <div className="expense-detail__receipts">
           {receipts.length > 0 &&
-            receipts.map((receipt, index) => {
-              console.log('individual', receipt);
+            receipts.map(receipt => {
               return (
                 <div
                   className="expense-detail__receipts--item"

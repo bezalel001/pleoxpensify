@@ -1,5 +1,6 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
+import { Alert, Button } from 'react-bootstrap';
 
 import './style.scss';
 
@@ -16,16 +17,16 @@ const renderField = ({
 }) => (
   <div>
     <div>
-      <input
+      {touched &&
+        ((error && <Alert variant="danger">{error}</Alert>) ||
+          (warning && <Alert variant="warning">{warning}</Alert>))}
+      <textarea
         {...input}
         placeholder={label}
         type={type}
         className={className}
         autoComplete={autoComplete}
       />
-      {touched &&
-        ((error && <span>{error}</span>) ||
-          (warning && <span>{warning}</span>))}
     </div>
   </div>
 );
@@ -46,20 +47,22 @@ const CommentForm = props => {
         />
 
         <div className="comment__form--btn">
-          <button
-            type="submit"
+          <Button
             disabled={submitting}
+            type="submit"
+            variant="info"
             className="comment__form--btn-submit"
           >
-            <ion-icon name="checkbox-outline" />
-          </button>
-          <button
-            type="button"
-            className="comment__form--btn-cancel"
+            Save
+          </Button>
+          <Button
+            type="reset"
+            variant="danger"
             onClick={reset}
+            className="comment__form--btn-cancel"
           >
-            <ion-icon name="close" />
-          </button>
+            Cancel
+          </Button>
         </div>
       </form>
     </div>

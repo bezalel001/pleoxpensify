@@ -1,5 +1,6 @@
-.btn {
-  font-size: 3rem;
+.receipt-form__btn {
+  margin-top: 1.5rem;
+  width: 100%;
   background-color: #eee;
   border: none;
   display: flex;
@@ -10,22 +11,19 @@
   display: inline-block;
   vertical-align: middle;
   line-height: 1.1;
-  margin-left: 10px;
 
-  &__submit {
-    color: #28b9b5;
-    border: none;
+  display: flex;
+  justify-content: space-between;
+
+  &--submit {
+    margin-right: 1rem;
+    font-size: 1.5rem;
+    width: 40%;
   }
 
-  &__cancel {
-    margin: 1rem;
-    color: #ff3366;
-    border: none;
-    padding: 0;
-  }
-
-  &__submit:active,
-  &__cancel:active {
-    transform: translateY(2px);
+  &--cancel {
+    margin-left: 1rem;
+    font-size: 1.5rem;
+    width: 40%;
   }
 }

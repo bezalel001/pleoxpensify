@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { reduxForm, Field } from 'redux-form';
+import Button from 'react-bootstrap/Button';
 
 import ReceiptsDropzone from './receipts-dropzone';
 
@@ -11,18 +12,27 @@ const FILE_FIELD_NAME = 'files';
 const ReceiptForm = props => {
   const { handleSubmit, reset } = props;
   return (
-    <div>
-      <form onSubmit={handleSubmit} className="form-group">
+    <div className="receipt-form">
+      <form onSubmit={handleSubmit}>
         <div>
           <Field name={FILE_FIELD_NAME} component={ReceiptsDropzone} />
         </div>
-        <div className="btn">
-          <button type="submit" className="btn__submit">
-            <ion-icon name="checkbox-outline" />
-          </button>
-          <button type="button" className="btn__cancel" onClick={reset}>
-            <ion-icon name="close" />
-          </button>
+        <div className="receipt-form__btn">
+          <Button
+            type="submit"
+            className="receipt-form__btn--submit"
+            variant="info"
+          >
+            Save
+          </Button>
+          <Button
+            type="reset"
+            className="receipt-form__btn--cancel"
+            onClick={reset}
+            variant="danger"
+          >
+            Cancel
+          </Button>
         </div>
       </form>
     </div>

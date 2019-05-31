@@ -33,12 +33,9 @@
     margin-top: 2rem;
     margin-bottom: 4rem;
     padding-top: 0;
-
-    &--icon {
-      padding-top: 5px;
-      padding-block: 5px;
-      display: inline-block;
-    }
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   &__description {

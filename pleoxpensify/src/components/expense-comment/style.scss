@@ -1,11 +1,13 @@
 .comment {
+  width: 100%;
+
   &__form {
     &--input {
       border: 1px solid #e7e7e7;
       background-color: #fff;
       color: inherit;
       font-family: inherit;
-      font-size: 14px;
+      font-size: 1.5rem;
       padding: 12px 15px;
       margin-right: 10px;
       border-radius: 5px;
@@ -20,39 +22,19 @@
     }
 
     &--btn {
-      font-size: 3rem;
-      background-color: #eee;
-      border: none;
       display: flex;
-      justify-content: center;
-      align-items: center;
-
-      cursor: pointer;
-      display: inline-block;
-      vertical-align: middle;
-      line-height: 1.1;
-      margin-left: 10px;
+      justify-content: space-between;
 
       &-submit {
-        color: #28b9b5;
-        border: none;
+        margin-right: 2rem;
+        font-size: 1.5rem;
+        width: 40%;
       }
 
       &-cancel {
-        margin: 1rem;
-        color: #ff3366;
-        border: none;
-        padding: 0;
-      }
-
-      &-submit:active,
-      &-cancel:active {
-        transform: translateY(2px);
-      }
-
-      &-submit:focus,
-      &-cancel:focus {
-        outline: none;
+        margin-left: 2rem;
+        font-size: 1.5rem;
+        width: 40%;
       }
     }
   }
