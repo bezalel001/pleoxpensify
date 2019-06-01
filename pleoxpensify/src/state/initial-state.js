@@ -8,7 +8,7 @@ export const getExpensesInitialState = () => {
     didInvalidate: false,
     totalPages: 0,
     page: 1,
-    error: null,
+    error: '',
     refresh: false,
     saveStatus: status.READY
   };
