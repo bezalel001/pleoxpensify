@@ -6,6 +6,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Alert, Spinner } from 'react-bootstrap';
 
 /**
  * Internal dependencies
@@ -26,7 +27,8 @@ import './style.scss';
 class ExpenseDetail extends Component {
   state = {
     isAddingComment: false,
-    isUploadingReceipt: false
+    isUploadingReceipt: false,
+    status: ''
   };
 
   toggleAddComment = () => {
@@ -58,14 +60,28 @@ class ExpenseDetail extends Component {
   };
 
   render() {
-    const { expense } = this.props;
+    const { expense, saveStatus, isLoading, error } = this.props;
+    console.log('Error', error);
 
     const { user, amount, date, comment, receipts, merchant } = expense;
     const { isAddingComment } = this.state;
 
+    if (isLoading && saveStatus === 'SAVING') {
+      return <Spinner animation="grow" variant="info" />;
+    }
+
     return (
       <div className="expense-detail">
         <h2 className="expense-detail__title">Details</h2>
+        <div className="expense-detail__alert">
+          {
+            {
+              SUCCESS: <Alert variant="success">Saved</Alert>,
+              SAVING: <Alert variant="info">Saving</Alert>,
+              ERROR: <Alert variant="danger">Failed:{error} </Alert>
+            }[saveStatus]
+          }
+        </div>
         <div className="expense-detail__description">
           <div className="expense-detail__merchant">
             {merchant.toLowerCase()}
