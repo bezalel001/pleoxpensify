@@ -25,11 +25,15 @@ import ReceiptForm from '../expense-receipts';
 import './style.scss';
 
 class ExpenseDetail extends Component {
-  state = {
-    isAddingComment: false,
-    isUploadingReceipt: false,
-    status: ''
-  };
+  constructor(props) {
+    super(props);
+    const { saveStatus } = this.props;
+    this.state = {
+      isAddingComment: false,
+      isUploadingReceipt: false,
+      status: saveStatus
+    };
+  }
 
   toggleAddComment = () => {
     const { isAddingComment } = this.state;
@@ -60,28 +64,25 @@ class ExpenseDetail extends Component {
   };
 
   render() {
-    const { expense, saveStatus, isLoading, error } = this.props;
-    console.log('Error', error);
+    const { expense, isLoading, error } = this.props;
 
     const { user, amount, date, comment, receipts, merchant } = expense;
-    const { isAddingComment } = this.state;
+    const { isAddingComment, status } = this.state;
 
-    if (isLoading && saveStatus === 'SAVING') {
+    if (isLoading && status === 'SAVING') {
       return <Spinner animation="grow" variant="info" />;
+    }
+
+    if (status !== 'READY') {
+      setTimeout(() => {
+        this.setState({ status: 'READY' });
+      }, 3000);
     }
 
     return (
       <div className="expense-detail">
         <h2 className="expense-detail__title">Details</h2>
-        <div className="expense-detail__alert">
-          {
-            {
-              SUCCESS: <Alert variant="success">Saved</Alert>,
-              SAVING: <Alert variant="info">Saving</Alert>,
-              ERROR: <Alert variant="danger">Failed:{error} </Alert>
-            }[saveStatus]
-          }
-        </div>
+
         <div className="expense-detail__description">
           <div className="expense-detail__merchant">
             {merchant.toLowerCase()}
@@ -123,6 +124,15 @@ class ExpenseDetail extends Component {
             <div className="expense-detail__date--format">
               {formatDate(date)}
             </div>
+          </div>
+          <div className="expense-detail__alert">
+            {
+              {
+                SUCCESS: <Alert variant="success">Saved</Alert>,
+                SAVING: <Alert variant="info">Saving</Alert>,
+                ERROR: <Alert variant="danger">Failed:{error} </Alert>
+              }[status]
+            }
           </div>
 
           <div className="expense-detail__comment-form">
