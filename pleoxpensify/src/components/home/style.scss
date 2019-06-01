@@ -1,5 +1,12 @@
 .expenses-home {
   &__expense-details {
     background-color: #eee;
+
+    &--no-details {
+      font-size: 200%;
+      position: relative;
+      top: 50rem;
+      left: 5rem;
+    }
   }
 }

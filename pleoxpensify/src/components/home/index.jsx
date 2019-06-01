@@ -7,7 +7,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Route } from 'react-router-dom';
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col, Spinner } from 'react-bootstrap';
 
 /**
  * Internal dependencies
@@ -55,9 +55,13 @@ class ExpensesHome extends Component {
   };
 
   render() {
-    const { expenses } = this.props;
-    const { page, totalPages } = expenses;
+    const { expenses, location } = this.props;
+    const { page, totalPages, isLoading } = expenses;
     const data = expenses.expenses;
+
+    // if (isLoading) {
+    //   return <Spinner animation="grow" variant="info" />;
+    // }
 
     return (
       <Container className="expenses-home">
@@ -69,14 +73,22 @@ class ExpensesHome extends Component {
             <div className="expenses-home__expense-list">
               <ExpenseList expenses={data} />
             </div>
-            <Pagination
-              page={page}
-              totalPages={totalPages}
-              onPaginationClick={this.onPaginationClick}
-            />
+            {data.length > 0 && (
+              <Pagination
+                page={page}
+                totalPages={totalPages}
+                onPaginationClick={this.onPaginationClick}
+              />
+            )}
           </Col>
           <Col className="expenses-home__expense-details">
-            {<Route path="/expenses/:id" component={ExpenseDetail} />}
+            {location.pathname === '/' || location.pathname === '/expenses' ? (
+              <h1 className="expenses-home__expense-details--no-details">
+                Click on a list item to view details
+              </h1>
+            ) : (
+              <Route path="/expenses/:id" component={ExpenseDetail} />
+            )}
           </Col>
         </Row>
       </Container>
