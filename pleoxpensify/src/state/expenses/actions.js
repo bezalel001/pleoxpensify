@@ -233,11 +233,11 @@ export const addReceiptToExpense = (expenseId, formData) => async dispatch => {
     );
 
     const receiptData = await response.data;
-    const receiptUrl = await receiptData.url;
+    const receiptUrl = await receiptData.receipts[
+      receiptData.receipts.length - 1
+    ];
 
-    if (receiptUrl) {
-      dispatch(addReceiptToExpenseSuccess(expenseId, receiptUrl));
-    }
+    dispatch(addReceiptToExpenseSuccess(expenseId, receiptUrl));
   } catch (error) {
     dispatch(addReceiptToExpenseFailure(error));
   }

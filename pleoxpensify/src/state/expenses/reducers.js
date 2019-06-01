@@ -71,7 +71,7 @@ const expensesReducer = (state = getExpensesInitialState(), action) => {
       };
 
     case ADD_COMMENT_TO_EXPENSE_SUCCESS: {
-      const expenses = state.map(expense => {
+      const expenses = state.expenses.map(expense => {
         if (expense.id === action.expenseId) {
           return {
             ...expense,
