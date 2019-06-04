@@ -21,7 +21,7 @@ const ExpenseList = props => {
 
   return (
     <div className="expense-list">
-      <ul className="expense-list___items">
+      <ul className="expense-list__items">
         {expenses.length > 0 &&
           expenses.map(expense => {
             return (

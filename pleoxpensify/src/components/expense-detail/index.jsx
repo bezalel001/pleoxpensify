@@ -61,18 +61,20 @@ class ExpenseDetail extends Component {
     receipt.append('receipt', fileInput.files[0]);
 
     await dispatch(addReceiptToExpense(id, receipt));
+    this.setState({ isUploadingReceipt: false });
   };
 
   render() {
     const { expense, isLoading, error } = this.props;
 
     const { user, amount, date, comment, receipts, merchant } = expense;
-    const { isAddingComment, status } = this.state;
+    const { isAddingComment, isUploadingReceipt, status } = this.state;
 
     if (isLoading && status === 'SAVING') {
       return <Spinner animation="grow" variant="info" />;
     }
 
+    /** Dimiss alert after 3s */
     if (status !== 'READY') {
       setTimeout(() => {
         this.setState({ status: 'READY' });
@@ -174,9 +176,25 @@ class ExpenseDetail extends Component {
               );
             })}
           <div className="expense-detail__receipts--item">
-            <div className=" expense-detail__receipts--form">
-              <ReceiptForm onSubmit={this.onReceiptSubmit} />
-            </div>
+            {isUploadingReceipt ? (
+              <div className=" expense-detail__receipts--form">
+                <ReceiptForm onSubmit={this.onReceiptSubmit} />
+              </div>
+            ) : (
+              <div
+                className="expense-detail__receipts--placeholder"
+                onMouseOver={this.toggleUploadReceipt}
+                onFocus={this.toggleUploadReceipt}
+              >
+                <div className="expense-detail__receipts--placeholder-content">
+                  <ion-icon
+                    size="large"
+                    name="add"
+                    className="receipts-dropzone__content--icon"
+                  />
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>

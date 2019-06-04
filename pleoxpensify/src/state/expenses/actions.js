@@ -83,6 +83,7 @@ export const fetchExpenses = ({
         offset
       }
     });
+    console.log('RESPONSE', response);
     const { expenses, total } = await response.data;
 
     dispatch(fetchExpensesSuccess(expenses, total));

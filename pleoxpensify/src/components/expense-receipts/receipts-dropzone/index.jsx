@@ -31,7 +31,7 @@ class ReceiptsDropzone extends Component {
           }) => {
             const isFileTooLarge =
               rejectedFiles.length > 0 && rejectedFiles[0].size > maxSize;
-            console.log('get input props', getInputProps());
+
             return (
               <div {...getRootProps()} className="receipts-dropzone__content">
                 <ul className="list-group mt-2">
