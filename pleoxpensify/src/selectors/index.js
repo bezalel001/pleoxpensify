@@ -15,7 +15,7 @@ const validateFilterStartDateOption = (createDate, filterStartDate) => {
 };
 
 const validateFilterEndDateOption = (createDate, filterEndDate) => {
-  return filterEndDate ? filterEndDate.isSameOrBefore(createDate, 'day') : true;
+  return filterEndDate ? filterEndDate.isSameOrAfter(createDate, 'day') : true;
 };
 
 /**
@@ -26,11 +26,6 @@ const validateFilterEndDateOption = (createDate, filterEndDate) => {
  * @return {Object}                Visible or Filtered Expenses
  */
 const getVisibleExpenses = (expensesObject, filters) => {
-  console.log('Expenses filter object', expensesObject);
-  // let { expenses } = expensesObject;
-  // if (Array.isArray(expensesObject)) {
-  //   expenses = expensesObject;
-  // }
   const { expenses } = expensesObject;
   const {
     filterText,
