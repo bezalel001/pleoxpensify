@@ -224,6 +224,7 @@ export const addReceiptToExpenseFailure = error => ({
 export const addReceiptToExpense = (expenseId, formData) => async dispatch => {
   try {
     dispatch(addReceiptToExpenseRequest());
+
     const response = await axios.post(
       `http://localhost:3000/expenses/${expenseId}/receipts`,
       formData,
@@ -235,12 +236,13 @@ export const addReceiptToExpense = (expenseId, formData) => async dispatch => {
     );
 
     const receiptData = await response.data;
+
     const receiptUrl = await receiptData.receipts[
       receiptData.receipts.length - 1
     ];
 
     dispatch(addReceiptToExpenseSuccess(expenseId, receiptUrl));
   } catch (error) {
-    dispatch(addReceiptToExpenseFailure(error));
+    dispatch(addReceiptToExpenseFailure(error.message));
   }
 };
