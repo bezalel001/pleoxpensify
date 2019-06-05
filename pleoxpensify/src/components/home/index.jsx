@@ -59,9 +59,9 @@ class ExpensesHome extends Component {
     const { page, totalPages, isLoading } = expenses;
     const data = expenses.expenses;
 
-    if (isLoading) {
-      return <Spinner animation="grow" variant="info" />;
-    }
+    // if (isLoading) {
+    //   return <Spinner animation="grow" variant="info" />;
+    // }
 
     return (
       <Container className="expenses-home">
