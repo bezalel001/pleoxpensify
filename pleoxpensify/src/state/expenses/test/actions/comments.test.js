@@ -1,5 +1,3 @@
-import configureMockStore from 'redux-mock-store';
-import thunk from 'redux-thunk';
 import moxios from 'moxios';
 import {
   addCommentToExpenseRequest,
@@ -12,8 +10,7 @@ import {
   ADD_COMMENT_TO_EXPENSE_REQUEST,
   ADD_COMMENT_TO_EXPENSE_SUCCESS
 } from '../../../action-types';
-import { getExpensesInitialState } from '../../../initial-state';
-import { BASE_URL } from '../../../../utils/constants';
+
 import { makeMockStore, mockSuccess, mockError } from './helpers';
 
 describe('add comment to an expense actions', () => {
