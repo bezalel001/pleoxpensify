@@ -1,6 +1,5 @@
-import configureMockStore from 'redux-mock-store';
-import thunk from 'redux-thunk';
 import moxios from 'moxios';
+
 import {
   fetchExpensesRequest,
   fetchExpensesFailure,
@@ -16,8 +15,8 @@ import {
   SET_CURRENT_PAGE,
   SET_TOTAL_NUMBER_OF_PAGES
 } from '../../../action-types';
-import { getExpensesInitialState } from '../../../initial-state';
-import { BASE_URL } from '../../../../utils/constants';
+
+import { makeMockStore, mockSuccess, mockError } from './helpers';
 
 describe('List expenses actions', () => {
   let action;
@@ -164,24 +163,19 @@ describe('List expenses actions', () => {
     });
   });
   describe('async fetch expenses action creator', () => {
-    const middlewares = [thunk];
-    const mockStore = configureMockStore(middlewares);
-    const store = mockStore(getExpensesInitialState);
-    const data = {
-      expenses,
-      total
-    };
-    const error = 'URL does not exist on the server';
     beforeEach(() => {
       moxios.install();
     });
     afterEach(() => {
       moxios.uninstall();
     });
+    it('should dispatch `fetchExpensesRequest` and `fetchExpensesSuccess` with server data on successs', async () => {
+      const response = { expenses, total };
+      const store = makeMockStore();
 
-    it('should create FETCH_EXPENSES_SUCCESS action object when fetching expenses has successfully been done', () => {
       moxios.wait(() => {
-        moxios.stubRequest(BASE_URL, { status: 200, response: data });
+        const request = moxios.requests.mostRecent();
+        request.respondWith(mockSuccess(response));
       });
 
       const expectedActions = [
@@ -189,27 +183,31 @@ describe('List expenses actions', () => {
         fetchExpensesSuccess(expenses, total)
       ];
 
-      store.dispatch(fetchExpenses({})).then(() => {
-        const actionsCalled = store.getActions();
-        expect(actionsCalled).toEqual(expectedActions);
-      });
+      await store.dispatch(fetchExpenses({}));
+      const actualActions = await store.getActions();
+
+      expect(actualActions).toEqual(expectedActions);
     });
 
-    it(' should create FETCH_EXPENSES_FAILURE action object for failed api calls', () => {
+    it('should dispatch `fetchExpensesRequest` and `fetchExpensesFailure` with error message', async () => {
+      const statusCode = 404;
+      const response = `Request failed with status code ${statusCode}`;
+      const store = makeMockStore();
+
       moxios.wait(() => {
-        moxios.stubRequest(`${BASE_URL}/expenses/expenses`, {
-          status: 404,
-          response: error
-        });
+        const request = moxios.requests.mostRecent();
+        request.respondWith(mockError(statusCode, response));
       });
+
       const expectedActions = [
         fetchExpensesRequest(),
-        fetchExpensesFailure(error)
+        fetchExpensesFailure(response)
       ];
-      store.dispatch(fetchExpenses({})).then(() => {
-        const actionsCalled = store.getActions();
-        expect(actionsCalled).toEqual(expectedActions);
-      });
+
+      await store.dispatch(fetchExpenses({}));
+      const actualActions = await store.getActions();
+
+      expect(actualActions).toEqual(expectedActions);
     });
   });
 });

@@ -75,7 +75,7 @@ export const fetchExpenses = ({
   limit = LIMIT
 }) => async dispatch => {
   try {
-    dispatch(fetchExpensesRequest);
+    dispatch(fetchExpensesRequest());
     const offset = (page - 1) * limit;
     const response = await axios.get(BASE_URL, {
       params: {
@@ -83,12 +83,12 @@ export const fetchExpenses = ({
         offset
       }
     });
-    console.log('RESPONSE', response);
+
     const { expenses, total } = await response.data;
 
     dispatch(fetchExpensesSuccess(expenses, total));
   } catch (error) {
-    dispatch(fetchExpensesFailure(error));
+    dispatch(fetchExpensesFailure(error.message));
   }
 };
 
@@ -171,11 +171,12 @@ export const addCommentToExpense = (expenseId, comment) => async dispatch => {
     const response = await axios.post(`${BASE_URL}/${expenseId}`, {
       comment
     });
+
     const data = await response.data;
 
     dispatch(addCommentToExpenseSuccess(expenseId, data.comment));
   } catch (error) {
-    dispatch(addCommentToExpenseFailure(error));
+    dispatch(addCommentToExpenseFailure(error.message));
   }
 };
 
