@@ -45,7 +45,10 @@ describe('add receipt to an expense actions', () => {
 
   describe('addReceiptToExpenseSuccess action creator', () => {
     beforeEach(() => {
-      action = addReceiptToExpenseSuccess(expenseId, receipts[2]);
+      action = addReceiptToExpenseSuccess(
+        expenseId,
+        receipts[receipts.length - 1]
+      );
     });
     it('should return an action object with the correct type', () => {
       expect(action.type).toEqual(ADD_RECEIPT_TO_EXPENSE_SUCCESS);
@@ -53,8 +56,8 @@ describe('add receipt to an expense actions', () => {
     it('should have the correct `id` payload', () => {
       expect(action.expenseId).toEqual(expenseId);
     });
-    it('should have the correct `comment` payload', () => {
-      expect(action.receipt).toEqual(receipts[2]);
+    it('should have the correct `receipt` payload', () => {
+      expect(action.receipt).toEqual(receipts[receipts.length - 1]);
     });
   });
 
@@ -67,7 +70,7 @@ describe('add receipt to an expense actions', () => {
     });
 
     it('should dispatch `addReceiptToExpenseRequest` and `addReceiptToExpenseSuccess` with server data on success', async () => {
-      const response = { id: expenseId, receipts };
+      const response = { receipts };
       const store = makeMockStore();
 
       moxios.wait(() => {
@@ -77,11 +80,11 @@ describe('add receipt to an expense actions', () => {
 
       const expectedActions = [
         addReceiptToExpenseRequest(),
-        addReceiptToExpenseSuccess(expenseId, receipts[2])
+        addReceiptToExpenseSuccess(expenseId, receipts[receipts.length - 1])
       ];
       const receipt = new FormData();
 
-      receipt.append('receipt', receipts[2]);
+      receipt.append('receipt', receipts[receipts.length - 1]);
 
       await store.dispatch(addReceiptToExpense(expenseId, receipt));
       const actualActions = await store.getActions();
@@ -103,7 +106,7 @@ describe('add receipt to an expense actions', () => {
       ];
       const receipt = new FormData();
 
-      receipt.append('receipt', receipts[2]);
+      receipt.append('receipt', receipts[receipts.length - 1]);
 
       await store.dispatch(addReceiptToExpense(expenseId, receipt));
       const actualActions = await store.getActions();
