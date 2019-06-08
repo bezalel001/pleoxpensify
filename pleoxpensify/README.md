@@ -131,8 +131,6 @@ For the `Redux` parts;
 - Use Reselect library to implement memoized, composable selector functions for efficient computation of derived data from the Redux store.
 - Test React components with data from Redux store
 - Write more test cases, including integration test. Full test coverage
-- Implement solution in TypeScript
-- Localization: support for multiple languages
 - Use `absolute imports` to import internal dependencies
 
 # Other Project Details
