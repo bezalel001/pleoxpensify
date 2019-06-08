@@ -1,5 +1,5 @@
-export const LIMIT = 10;
-export const BASE_URL = 'http://localhost:3000/expenses';
+export const LIMIT = 15;
+export const BASE_URL = 'http://localhost:3000';
 
 export const status = {
   ERROR: 'ERROR',

@@ -1,21 +1,27 @@
 .expense-detail {
+  padding-left: 2.5rem;
+  width: 100%;
+
   &__title {
     text-transform: uppercase;
     font-size: 18px;
     font-weight: 400;
-    margin: 5rem 0;
+    margin: 1.5rem 0.5rem;
     width: 10%;
   }
 
   &__alert {
     font-size: 120%;
     font-weight: 700;
+    width: 90%;
+    text-align: center;
+    margin-top: 1rem;
   }
 
   &__merchant {
     font-size: 150%;
     font-weight: 200;
-    background-color: #28b9b5;
+    background-color: var(--color-secondary);
     color: #fff;
     width: 15rem;
     height: 15rem;
@@ -24,6 +30,8 @@
     text-transform: capitalize;
     border-radius: 50%;
     padding: 6rem 1rem 1rem 1rem;
+    width: 50%;
+    margin: 0 25% 0 20%;
   }
 
   &__amount {
@@ -31,16 +39,23 @@
     font-weight: 600;
 
     width: 50%;
-    margin: 0 auto;
-    color: #ff3366;
+    margin: 0 25% 0 20%;
+    color: #fff;
+    background-color: var(--color-primary-light);
 
-    text-align: center;
     margin-top: 2rem;
     margin-bottom: 4rem;
     padding-top: 0;
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 1rem;
+
+    &--description {
+      margin-right: 3rem;
+      font-size: 90%;
+      color: #000;
+    }
   }
 
   &__description {
@@ -62,14 +77,14 @@
     &--placeholder {
       width: 15rem;
       height: 15rem;
-      border: 1px dashed #28b9b5;
+      border: 1px dashed var(--color-secondary);
       text-align: center;
       background-color: #fff;
       border-radius: 3px;
 
       &-content {
         padding: 5rem;
-        color: #28b9b5;
+        color: var(--color-secondary);
         font-size: 120%;
       }
     }
@@ -88,67 +103,72 @@
     }
   }
 
-  &__user-name {
-    display: flex;
-    margin-top: 1rem;
+  &__user {
+    width: 100%;
 
-    &--icon {
-      flex: 1 0 20%;
-      font-size: 120%;
-      margin-right: 2rem;
+    &-name {
+      margin-top: 1rem;
+      display: flex;
+
+      &--icon {
+        font-size: 120%;
+        margin-right: 4rem;
+      }
+
+      &--first-last {
+        font-weight: 600;
+      }
     }
 
-    &--first,
-    &--last {
-      flex: 1 0 60%;
-      font-weight: 600;
-    }
-  }
+    &-email {
+      display: flex;
+      margin-top: 1rem;
 
-  &__user-email {
-    display: flex;
-    margin-top: 1rem;
+      &--icon {
+        font-size: 120%;
+        margin-right: 4rem;
+      }
 
-    &--icon {
-      flex: 1 0 20%;
-      font-size: 120%;
-      margin-right: 2rem;
+      &--address {
+      }
     }
 
-    &--address {
-      position: absolute;
-      left: 5rem;
-    }
-  }
+    &-date {
+      display: flex;
+      margin-top: 1rem;
+      align-content: center;
+      justify-content: flex-start;
 
-  &__date {
-    display: flex;
-    margin-top: 1rem;
+      width: 100%;
 
-    &--icon {
-      flex: 1 0 20%;
-      font-size: 120%;
-      margin-right: 2rem;
-    }
+      &--icon {
+        margin-right: 4rem;
+        font-size: 120%;
+      }
 
-    &--format {
-      margin-left: 1rem;
-      position: absolute;
-      left: 5rem;
+      &--format {
+      }
     }
   }
 
   &__comment {
-    margin-top: 1rem;
-    margin: 0 auto;
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
+    border: 1px dashed #555;
+    padding: 4px;
+    width: 100%;
 
     &--text {
       font-family: 'Indie Flower', cursive;
       font-weight: 600;
       background-color: #efefef;
       font-size: 110%;
-      color: #28b9b5;
+      color: var(--color-secondary);
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    &--form {
+      width: 100%;
     }
 
     &--add {
@@ -167,7 +187,7 @@
 
       &--text {
         position: absolute;
-        left: 5rem;
+        left: 7rem;
       }
     }
   }

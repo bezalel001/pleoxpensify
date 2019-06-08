@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
 import { reduxForm, Field } from 'redux-form';
-import Button from 'react-bootstrap/Button';
+
+import { Alert, Button } from 'react-bootstrap';
 
 import ReceiptsDropzone from './receipts-dropzone';
 
@@ -10,31 +12,41 @@ import './style.scss';
 const FILE_FIELD_NAME = 'files';
 
 const ReceiptForm = props => {
-  const { handleSubmit, reset } = props;
+  console.log('receipttt', props);
+
+  const { handleSubmit, reset, error, touch } = props;
+
   return (
     <div className="receipt-form">
+      {' '}
+      {touch && (error && <Alert variant="danger"> {error}</Alert>)}
       <form onSubmit={handleSubmit}>
+        {' '}
         <div>
-          <Field name={FILE_FIELD_NAME} component={ReceiptsDropzone} />
-        </div>
+          {' '}
+          <Field name={FILE_FIELD_NAME} component={ReceiptsDropzone} />{' '}
+        </div>{' '}
         <div className="receipt-form__btn">
+          {' '}
           <Button
             type="submit"
             className="receipt-form__btn--submit"
             variant="info"
           >
-            Save
-          </Button>
+            {' '}
+            Save{' '}
+          </Button>{' '}
           <Button
             type="reset"
             className="receipt-form__btn--cancel"
             onClick={reset}
             variant="danger"
           >
-            Cancel
-          </Button>
-        </div>
-      </form>
+            {' '}
+            Cancel{' '}
+          </Button>{' '}
+        </div>{' '}
+      </form>{' '}
     </div>
   );
 };

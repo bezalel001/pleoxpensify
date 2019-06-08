@@ -18,6 +18,7 @@ import {
   addReceiptToExpense
 } from '../../state/expenses/actions';
 import ReceiptForm from '../expense-receipts';
+import { BASE_URL } from '../../utils/constants';
 
 /**
  * Style dependencies
@@ -27,11 +28,11 @@ import './style.scss';
 class ExpenseDetail extends Component {
   constructor(props) {
     super(props);
-    const { saveStatus } = this.props;
+
     this.state = {
       isAddingComment: false,
       isUploadingReceipt: false,
-      status: saveStatus
+      status: 'READY'
     };
   }
 
@@ -50,10 +51,20 @@ class ExpenseDetail extends Component {
     const { id } = expense;
     const comment = commentFormvalue.expenseComment;
     dispatch(addCommentToExpense(id, comment));
-    this.setState({ isAddingComment: false });
+    this.setState({ isAddingComment: false, status: 'SUCCESS' });
   };
 
   onReceiptSubmit = async fileInput => {
+    const hasReceiptProperty = Object.prototype.hasOwnProperty.call(
+      fileInput,
+      'files'
+    );
+
+    if (!hasReceiptProperty) {
+      this.setState({ status: 'ERROR' });
+      this.toggleUploadReceipt();
+      return;
+    }
     const { expense, dispatch } = this.props;
     const { id } = expense;
     const receipt = new FormData();
@@ -61,7 +72,7 @@ class ExpenseDetail extends Component {
     receipt.append('receipt', fileInput.files[0]);
 
     await dispatch(addReceiptToExpense(id, receipt));
-    this.setState({ isUploadingReceipt: false });
+    this.setState({ isUploadingReceipt: false, status: 'SUCCESS' });
   };
 
   render() {
@@ -71,6 +82,7 @@ class ExpenseDetail extends Component {
     }
 
     const { user, amount, date, comment, receipts, merchant } = expense;
+    const name = `${user.first} ${user.last}`;
 
     const { isAddingComment, isUploadingReceipt, status } = this.state;
 
@@ -94,6 +106,8 @@ class ExpenseDetail extends Component {
             {merchant.toLowerCase()}
           </div>
           <div className="expense-detail__amount">
+            <div className="expense-detail__amount--description">Expenses</div>
+
             <div className="expense-detail__amount--icon">
               <ion-icon name="remove" />
             </div>
@@ -101,18 +115,19 @@ class ExpenseDetail extends Component {
               {formatAmount(amount)}
             </div>
           </div>
-          <div className="expense-detail__comment">
-            <div className="expense-detail__comment--text">{comment}</div>
-          </div>
+          {comment && (
+            <div className="expense-detail__comment">
+              <div className="expense-detail__comment--text">{comment}</div>
+            </div>
+          )}
           <div className="expense-detail__user">
             <div className="expense-detail__user-name">
               <div className="expense-detail__user-name--icon">
                 <ion-icon name="person" />
               </div>
-              <div className="expense-detail__user-name--first">
-                {user.first}
+              <div className="expense-detail__user-name--first-last">
+                {name}
               </div>
-              <div className="expense-detail__user-name--last">{user.last}</div>
             </div>
             <div className="expense-detail__user-email">
               <div className="expense-detail__user-email--icon">
@@ -122,15 +137,16 @@ class ExpenseDetail extends Component {
                 {user.email}
               </div>
             </div>
-          </div>
-          <div className="expense-detail__date">
-            <div className="expense-detail__date--icon">
-              <ion-icon name="calendar" />
+            <div className="expense-detail__user-date">
+              <div className="expense-detail__user-date--icon">
+                <ion-icon name="calendar" />
+              </div>
+              <div className="expense-detail__user-date--format">
+                {formatDate(date)}
+              </div>
             </div>
-            <div className="expense-detail__date--format">
-              {formatDate(date)}
-            </div>
           </div>
+
           <div className="expense-detail__alert">
             {
               {
@@ -169,10 +185,10 @@ class ExpenseDetail extends Component {
                   className="expense-detail__receipts--item"
                   key={receipt.url}
                 >
-                  <a href={`http://localhost:3000${receipt.url}`}>
+                  <a href={`${BASE_URL}${receipt.url}`}>
                     <img
                       className=" expense-detail__receipts--item-image"
-                      src={`http://localhost:3000${receipt.url}`}
+                      src={`${BASE_URL}${receipt.url}`}
                       alt="receipt"
                     />
                   </a>

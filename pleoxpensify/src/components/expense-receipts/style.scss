@@ -1,29 +1,33 @@
-.receipt-form__btn {
-  margin-top: 1.5rem;
-  width: 100%;
-  background-color: #eee;
-  border: none;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.receipt-form {
+  padding-bottom: 2rem;
 
-  cursor: pointer;
-  display: inline-block;
-  vertical-align: middle;
-  line-height: 1.1;
+  .receipt-form__btn {
+    margin-top: 1.5rem;
+    width: 100%;
+    background-color: #eee;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-  display: flex;
-  justify-content: space-between;
+    cursor: pointer;
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 1.1;
 
-  &--submit {
-    margin-right: 1rem;
-    font-size: 1.5rem;
-    width: 40%;
-  }
+    display: flex;
+    justify-content: space-between;
 
-  &--cancel {
-    margin-left: 1rem;
-    font-size: 1.5rem;
-    width: 40%;
+    &--submit {
+      margin-right: 1rem;
+      font-size: 1.5rem;
+      width: 40%;
+    }
+
+    &--cancel {
+      margin-left: 1rem;
+      font-size: 1.5rem;
+      width: 40%;
+    }
   }
 }
