@@ -1,0 +1,25 @@
+.not-found {
+  width: 100%;
+  text-align: center;
+  margin-top: 6rem;
+
+  &__title {
+    font-weight: 400;
+    color: var(--color-grey-light-3);
+  }
+
+  &__link {
+    display: inline-block;
+    margin-top: 4rem;
+    color: var(--color-grey-light-1);
+    text-decoration: none;
+    border: 1px solid var(--color-grey-light-3);
+    border-radius: 4px;
+    padding: 1.8rem;
+    transition: border 0.2s;
+  }
+
+  &__link:hover {
+    border: 1px solid var(--color-grey-light-1);
+  }
+}

@@ -15,7 +15,9 @@ import { formatAmount, formatDate } from '../../utils/functions';
 import CommentForm from '../expense-comment';
 import {
   addCommentToExpense,
-  addReceiptToExpense
+  addReceiptToExpense,
+  addReceiptToExpenseFailure,
+  addCommentToExpenseFailure
 } from '../../state/expenses/actions';
 import ReceiptForm from '../expense-receipts';
 import { BASE_URL } from '../../utils/constants';
@@ -33,7 +35,7 @@ class ExpenseDetail extends Component {
     this.state = {
       isAddingComment: false,
       isUploadingReceipt: false,
-      status: 'READY'
+      show: true
     };
   }
 
@@ -51,8 +53,12 @@ class ExpenseDetail extends Component {
     const { expense, dispatch } = this.props;
     const { id } = expense;
     const comment = commentFormvalue.expenseComment;
+    if (!comment) {
+      dispatch(addCommentToExpenseFailure('No comment found'));
+      return;
+    }
     dispatch(addCommentToExpense(id, comment));
-    this.setState({ isAddingComment: false, status: 'SUCCESS' });
+    this.setState({ isAddingComment: false });
   };
 
   onReceiptSubmit = async fileInput => {
@@ -62,8 +68,10 @@ class ExpenseDetail extends Component {
     );
 
     if (!hasReceiptProperty) {
-      this.setState({ status: 'ERROR' });
       this.toggleUploadReceipt();
+      const { dispatch } = this.props;
+      dispatch(addReceiptToExpenseFailure('No receipt found'));
+      this.setState({ show: true });
       return;
     }
     const { expense, dispatch } = this.props;
@@ -73,11 +81,15 @@ class ExpenseDetail extends Component {
     receipt.append('receipt', fileInput.files[0]);
 
     await dispatch(addReceiptToExpense(id, receipt));
-    this.setState({ isUploadingReceipt: false, status: 'SUCCESS' });
+    this.setState({ isUploadingReceipt: false });
+  };
+
+  onClose = () => {
+    this.setState({ show: false });
   };
 
   render() {
-    const { expense, isLoading, error } = this.props;
+    const { expense, isLoading, error, saveStatus } = this.props;
     if (expense === undefined) {
       return <Redirect to="/" />;
     }
@@ -85,18 +97,17 @@ class ExpenseDetail extends Component {
     const { user, amount, date, comment, receipts, merchant } = expense;
     const name = `${user.first} ${user.last}`;
 
-    const { isAddingComment, isUploadingReceipt, status } = this.state;
+    const { isAddingComment, isUploadingReceipt, show } = this.state;
+    let status = saveStatus;
 
-    if (isLoading && status === 'SAVING') {
+    if (isLoading) {
       return <Loader />;
     }
-
-    /** Dimiss alert after 3s */
-    if (status !== 'READY') {
-      setTimeout(() => {
-        this.setState({ status: 'READY' });
-      }, 3000);
+    if (!show) {
+      status = 'READY';
     }
+
+    //
 
     return (
       <div className="expense-detail">
@@ -151,9 +162,21 @@ class ExpenseDetail extends Component {
           <div className="expense-detail__alert">
             {
               {
-                SUCCESS: <Alert variant="success">Saved</Alert>,
-                SAVING: <Alert variant="info">Saving</Alert>,
-                ERROR: <Alert variant="danger">Failed:{error} </Alert>
+                SUCCESS: (
+                  <Alert variant="success" onClose={this.onClose} dismissible>
+                    Saved
+                  </Alert>
+                ),
+                SAVING: (
+                  <Alert variant="info" onClose={this.onClose} dismissible>
+                    Saving
+                  </Alert>
+                ),
+                ERROR: (
+                  <Alert variant="danger" onClose={this.onClose} dismissible>
+                    Failed:{error}{' '}
+                  </Alert>
+                )
               }[status]
             }
           </div>

@@ -7,7 +7,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Route } from 'react-router-dom';
-import { Container, Row, Col, Spinner } from 'react-bootstrap';
+import { Container, Row, Col } from 'react-bootstrap';
 
 /**
  * Internal dependencies
@@ -23,6 +23,7 @@ import {
 import { LIMIT } from '../../utils/constants';
 import Pagination from '../pagination';
 import ExpenseDetail from '../expense-detail';
+import Loader from '../loader';
 
 /**
  * Style dependencies
@@ -59,9 +60,9 @@ class ExpensesHome extends Component {
     const { page, totalPages, isLoading } = expenses;
     const data = expenses.expenses;
 
-    // if (isLoading) {
-    //   return <Spinner animation="grow" variant="info" />;
-    // }
+    if (isLoading) {
+      return <Loader />;
+    }
 
     return (
       <Container className="expenses-home">
@@ -74,11 +75,13 @@ class ExpensesHome extends Component {
               <ExpenseList expenses={data} />
             </div>
             {data.length > 0 && (
-              <Pagination
-                page={page}
-                totalPages={totalPages}
-                onPaginationClick={this.onPaginationClick}
-              />
+              <Row>
+                <Pagination
+                  page={page}
+                  totalPages={totalPages}
+                  onPaginationClick={this.onPaginationClick}
+                />
+              </Row>
             )}
           </Col>
           <Col className="expenses-home__expense-details">
