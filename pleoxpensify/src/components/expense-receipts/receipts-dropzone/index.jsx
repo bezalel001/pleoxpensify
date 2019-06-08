@@ -9,8 +9,7 @@ class ReceiptsDropzone extends Component {
   };
 
   render() {
-    const maxSize = 100485768;
-    console.log('files props', this.props);
+    const maxSize = 500485768;
 
     return (
       <div className="receipts-dropzone">
@@ -34,11 +33,11 @@ class ReceiptsDropzone extends Component {
 
             return (
               <div {...getRootProps()} className="receipts-dropzone__content">
-                <ul className="list-group mt-2">
+                <ul className="receipts-dropzone__content--list-group list-group mt-2">
                   {acceptedFiles.length > 0 &&
                     acceptedFiles.map(acceptedFile => (
                       <li
-                        className="list-group-item list-group-item-success"
+                        className="receipts-dropzone__content--list-group-item list-group-item"
                         key={acceptedFile.path}
                       >
                         {acceptedFile.name}
@@ -53,6 +52,7 @@ class ReceiptsDropzone extends Component {
                     className="receipts-dropzone__content--icon"
                   />
                 )}
+
                 {isDragActive && !isDragReject && 'Drop it like its hot!'}
                 {isDragReject && 'File type not accepted, sorry!'}
                 {isFileTooLarge && (

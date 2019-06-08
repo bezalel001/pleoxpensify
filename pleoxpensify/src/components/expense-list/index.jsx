@@ -22,14 +22,17 @@ const ExpenseList = props => {
   return (
     <div className="expense-list">
       <ul className="expense-list__items">
-        {expenses.length > 0 &&
+        {expenses.length === 0 ? (
+          <p className="expense-list__no-items">No Expense items</p>
+        ) : (
           expenses.map(expense => {
             return (
               <li className="expense-list__items--item" key={expense.id}>
                 <ExpenseListItem expense={expense} />
               </li>
             );
-          })}
+          })
+        )}
       </ul>
     </div>
   );

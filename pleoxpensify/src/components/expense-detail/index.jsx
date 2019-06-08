@@ -7,7 +7,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Alert, Spinner } from 'react-bootstrap';
-
+import { Redirect } from 'react-router-dom';
 /**
  * Internal dependencies
  */
@@ -66,8 +66,12 @@ class ExpenseDetail extends Component {
 
   render() {
     const { expense, isLoading, error } = this.props;
+    if (expense === undefined) {
+      return <Redirect to="/" />;
+    }
 
     const { user, amount, date, comment, receipts, merchant } = expense;
+
     const { isAddingComment, isUploadingReceipt, status } = this.state;
 
     if (isLoading && status === 'SAVING') {

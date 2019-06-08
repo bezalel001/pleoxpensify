@@ -10,9 +10,15 @@
     padding: 5rem;
     color: #28b9b5;
     font-size: 120%;
+    width: 100%;
 
     &:focus {
       outline: none;
+    }
+
+    &--list-group-item {
+      padding-right: 2rem;
+      width: 100%;
     }
   }
 }

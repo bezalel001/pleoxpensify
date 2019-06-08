@@ -8,7 +8,8 @@ Technologies and Tools
 - React & Redux
 - SCSS
 - React-bootstrap, React-dropzone
-- Eslint, Prettier, Airbnb style guide
+- Eslint, Prettier, Airbnb style guide,
+- Enzyme, redux-mock-store
 
 ### Folder Structure
 
@@ -83,3 +84,20 @@ Technologies and Tools
 ├── constants.js
 └── functions.js
 ```
+
+### Testing
+
+A robust test suite is a vital constituent of quality software. With a good test suite, one can more confidently refactor or add features to an application.
+I focused exclusively on `unit test`ing this React application.
+
+For the `Components` I made 3 kinds of assertions:
+
+- Given a set of inputs( state & props ), assert what the component should render.
+- Given a user action, assert how the component behaves. The component might make a state update(`mapStateTopProps or setState`) or call a prop-function(`dispatch`) passed to it by a parent.
+- Only the rendering of the components without a Redux store are tested, hence, I `export`ed the undecorated named components
+
+For the `Redux` parts;
+
+- `Action Creators:` test whether the correct action creator was called and also whether the correct action creator was returned
+- `Async Action Creators:` I used `redux-mock-store` to mock the Redux store completely for tests
+- `Reducers:` test whether they return the new state after applying the action to the previous state

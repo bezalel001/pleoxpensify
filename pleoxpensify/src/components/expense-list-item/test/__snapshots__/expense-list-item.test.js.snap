@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ExpenseListItem should render ExpenseListItem Correctly 1`] = `ShallowWrapper {}`;
+
+exports[`ExpenseListItem should render ExpenseListItem correctly 1`] = `ShallowWrapper {}`;

@@ -37,14 +37,16 @@ const ExpenseListItem = props => {
   );
 };
 ExpenseListItem.propTypes = {
-  user: PropTypes.shape({
-    first: PropTypes.string.isRequired,
-    last: PropTypes.string.isRequired,
-    email: PropTypes.string.isRequired
-  }).isRequired,
-  amount: PropTypes.shape({
-    value: PropTypes.number.isRequired,
-    currency: PropTypes.string.isRequired
+  expense: PropTypes.shape({
+    user: PropTypes.shape({
+      first: PropTypes.string.isRequired,
+      last: PropTypes.string.isRequired,
+      email: PropTypes.string.isRequired
+    }).isRequired,
+    amount: PropTypes.shape({
+      value: PropTypes.string.isRequired,
+      currency: PropTypes.string.isRequired
+    }).isRequired
   }).isRequired
 };
 
