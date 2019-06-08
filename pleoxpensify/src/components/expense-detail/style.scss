@@ -6,8 +6,7 @@
     text-transform: uppercase;
     font-size: 18px;
     font-weight: 400;
-    margin: 1.5rem 0.5rem;
-    width: 10%;
+    margin-top: 1.5rem;
   }
 
   &__alert {
@@ -154,8 +153,9 @@
   &__comment {
     margin-bottom: 2rem;
     border: 1px dashed #555;
-    padding: 4px;
-    width: 100%;
+    padding: 1px;
+    width: 93%;
+    text-align: center;
 
     &--text {
       font-family: 'Indie Flower', cursive;

@@ -29,6 +29,8 @@ const ExpenseListItem = props => {
         to={`/expenses/${expense.id}`}
         className="expense-list-item"
         style={{ textDecoration: 'none' }}
+        activeClassName="expense-list-item__is-active"
+        exact
       >
         <div className="expense-list-item__user">{name}</div>
         <div className="expense-list-item__amount">{formattedAmount}</div>

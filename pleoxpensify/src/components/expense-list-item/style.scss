@@ -10,14 +10,18 @@
 
   transition: all 0.1s ease;
 
-  &:hover,
-  &:active {
+  &:hover {
+    background-color: var(--color-grey-light-3);
+  }
+
+  &:active,
+  &__is-active {
     border-color: 2px solid var(--color-primary-light);
-    color: var(--color-primary-light);
+    color: var(--color-primary-light-3);
     border-radius: 1rem;
     font-weight: 700;
-    font-size: 105%;
-    background-color: #eee;
+    font-size: 110%;
+    background-color: var(--color-grey-light-4);
   }
 
   &:first-child {
@@ -25,7 +29,7 @@
   }
 
   &:nth-child(even) {
-    background-color: #f7f7f7;
+    background-color: var(--color-grey-dark-1);
   }
 
   &__link {

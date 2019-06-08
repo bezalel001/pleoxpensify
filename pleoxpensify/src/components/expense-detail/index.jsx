@@ -6,7 +6,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Alert, Spinner } from 'react-bootstrap';
+import { Alert } from 'react-bootstrap';
 import { Redirect } from 'react-router-dom';
 /**
  * Internal dependencies
@@ -19,6 +19,7 @@ import {
 } from '../../state/expenses/actions';
 import ReceiptForm from '../expense-receipts';
 import { BASE_URL } from '../../utils/constants';
+import Loader from '../loader';
 
 /**
  * Style dependencies
@@ -87,7 +88,7 @@ class ExpenseDetail extends Component {
     const { isAddingComment, isUploadingReceipt, status } = this.state;
 
     if (isLoading && status === 'SAVING') {
-      return <Spinner animation="grow" variant="info" />;
+      return <Loader />;
     }
 
     /** Dimiss alert after 3s */

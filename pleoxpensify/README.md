@@ -133,6 +133,7 @@ For the `Redux` parts;
 - Write more test cases, including integration test. Full test coverage
 - Implement solution in TypeScript
 - Localization: support for multiple languages
+- Use `absolute imports` to import internal dependencies
 
 # Other Project Details
 
