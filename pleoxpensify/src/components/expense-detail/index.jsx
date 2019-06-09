@@ -8,6 +8,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Alert } from 'react-bootstrap';
 import { Redirect } from 'react-router-dom';
+
 /**
  * Internal dependencies
  */

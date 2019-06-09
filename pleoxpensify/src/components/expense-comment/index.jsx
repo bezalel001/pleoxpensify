@@ -30,7 +30,6 @@ const renderField = ({
     </div>
   </div>
 );
-
 const CommentForm = props => {
   const { handleSubmit, submitting, reset } = props;
   return (

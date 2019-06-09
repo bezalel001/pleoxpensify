@@ -11,7 +11,11 @@ import {
   ADD_COMMENT_TO_EXPENSE_SUCCESS
 } from '../../../action-types';
 
-import { makeMockStore, mockSuccess, mockError } from './helpers';
+import {
+  makeMockStore,
+  mockSuccess,
+  mockError
+} from '../../../../utils/fixtures/helpers';
 
 describe('add comment to an expense actions', () => {
   let action;
