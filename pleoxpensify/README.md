@@ -129,12 +129,11 @@ For the `Redux` parts;
 - Responsive design
 - Improve UI/UX design
 - Use Reselect library to implement memoized, composable selector functions for efficient computation of derived data from the Redux store.
-- Test React components with data from Redux store
 - Write more test cases, including integration test. Full test coverage
 - Use `absolute imports` to import internal dependencies
 
-# Other Project Details
+### Other Project Details
 
-- It took me approxiamtely ~ 40 hours (spread over 2weeks ) to design, implement and write unit tests for the project
+- It took me approxiamtely ~ 40 hours (spread over 2.5weeks ) to design, implement and write unit tests for the project
 - Nothing really difficult. Just that it's hard to know when to stop, since there's only one chance of impressing the extremely talented software engineers at Pleo
 - I am proud of using Redux for state management and my architecture skills
