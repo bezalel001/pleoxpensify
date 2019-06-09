@@ -17,7 +17,11 @@ import {
 } from '../../../action-types';
 import { expenses, total } from '../../../../utils/fixtures';
 
-import { makeMockStore, mockSuccess, mockError } from './helpers';
+import {
+  makeMockStore,
+  mockSuccess,
+  mockError
+} from '../../../../utils/fixtures/helpers';
 
 describe('List expenses actions', () => {
   let action;
