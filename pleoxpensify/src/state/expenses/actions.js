@@ -23,6 +23,8 @@ import {
 } from '../action-types';
 import { LIMIT, BASE_URL } from '../../utils/constants';
 
+const signal = axios.CancelToken.source();
+
 /**
  * Returns an action object signalling the request to retrieve expenses
  *
@@ -244,5 +246,8 @@ export const addReceiptToExpense = (expenseId, formData) => async dispatch => {
     dispatch(addReceiptToExpenseSuccess(expenseId, receiptUrl));
   } catch (error) {
     dispatch(addReceiptToExpenseFailure(error.message));
+  } finally {
+    signal.cancel();
   }
+  return signal;
 };

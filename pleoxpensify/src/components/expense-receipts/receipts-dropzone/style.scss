@@ -1,24 +1,31 @@
 .receipts-dropzone {
   width: 15rem;
   height: 15rem;
-  border: 1px dashed #28b9b5;
+  border: 1px dashed var(--color-secondary);
   text-align: center;
-  background-color: #fff;
+  background-color: var(--color-grey-light-1);
   border-radius: 3px;
 
+  &__remove-file {
+    color: var(--color-primary-dark);
+  }
+
   &__content {
-    padding: 5rem;
-    color: #28b9b5;
+    color: var(--color-secondary);
     font-size: 120%;
     width: 100%;
+    border: none;
+    padding-top: 4.5rem;
 
     &:focus {
       outline: none;
     }
 
-    &--list-group-item {
-      padding-right: 2rem;
-      width: 100%;
+    &--list-group {
+      &-item {
+        width: 100%;
+        border: none;
+      }
     }
   }
 }

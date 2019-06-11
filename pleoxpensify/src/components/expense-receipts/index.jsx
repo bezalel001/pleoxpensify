@@ -12,8 +12,6 @@ import './style.scss';
 const FILE_FIELD_NAME = 'files';
 
 const ReceiptForm = props => {
-  console.log('receipttt', props);
-
   const { handleSubmit, reset, error, touch } = props;
 
   return (
@@ -35,15 +33,6 @@ const ReceiptForm = props => {
           >
             {' '}
             Save{' '}
-          </Button>{' '}
-          <Button
-            type="reset"
-            className="receipt-form__btn--cancel"
-            onClick={reset}
-            variant="danger"
-          >
-            {' '}
-            Cancel{' '}
           </Button>{' '}
         </div>{' '}
       </form>{' '}

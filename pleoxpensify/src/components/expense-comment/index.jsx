@@ -1,7 +1,15 @@
+/** @format */
+
+/**
+ * External dependencies
+ */
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { Alert, Button } from 'react-bootstrap';
 
+/**
+ * Style dependencies
+ */
 import './style.scss';
 
 const required = value =>

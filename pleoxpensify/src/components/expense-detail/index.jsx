@@ -38,6 +38,11 @@ class ExpenseDetail extends Component {
       isUploadingReceipt: false,
       show: true
     };
+    this.cancelToken = null;
+  }
+
+  componentWillUnmount() {
+    if (this.cancelToken) this.cancelToken.cancel();
   }
 
   toggleAddComment = () => {
@@ -81,7 +86,7 @@ class ExpenseDetail extends Component {
 
     receipt.append('receipt', fileInput.files[0]);
 
-    await dispatch(addReceiptToExpense(id, receipt));
+    this.cancelToken = await dispatch(addReceiptToExpense(id, receipt));
     this.setState({ isUploadingReceipt: false });
   };
 
