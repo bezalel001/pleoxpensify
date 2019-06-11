@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Dropzone from 'react-dropzone';
-import Button from 'react-bootstrap/Button';
+
 import './style.scss';
 
 class ReceiptsDropzone extends Component {

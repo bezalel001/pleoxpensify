@@ -12,32 +12,30 @@ import './style.scss';
 const FILE_FIELD_NAME = 'files';
 
 const ReceiptForm = props => {
-  const { handleSubmit, reset, error, touch } = props;
+  const { handleSubmit, error, touch } = props;
 
   return (
     <div className="receipt-form">
-      {' '}
       {touch && (error && <Alert variant="danger"> {error}</Alert>)}
       <form onSubmit={handleSubmit}>
-        {' '}
-        <div>
-          {' '}
-          <Field name={FILE_FIELD_NAME} component={ReceiptsDropzone} />{' '}
-        </div>{' '}
+        <Field name={FILE_FIELD_NAME} component={ReceiptsDropzone} />
+
         <div className="receipt-form__btn">
-          {' '}
           <Button
             type="submit"
             className="receipt-form__btn--submit"
             variant="info"
           >
-            {' '}
-            Save{' '}
-          </Button>{' '}
-        </div>{' '}
-      </form>{' '}
+            Save
+          </Button>
+        </div>
+      </form>
     </div>
   );
+};
+
+ReceiptForm.propTypes = {
+  handleSubmit: PropTypes.func.isRequired
 };
 
 export default reduxForm({
