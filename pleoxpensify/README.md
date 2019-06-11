@@ -23,6 +23,7 @@ Technologies and Tools
 │   │   │   ├── index.jsx
 │   │   │   ├── style.scss
 │   │   │   └── test
+│   │   │       └── expense-comment.test.js
 │   │   ├── expense-detail
 │   │   │   ├── index.jsx
 │   │   │   ├── style.scss
@@ -85,7 +86,6 @@ Technologies and Tools
 │   │   │   └── test
 │   │   │       ├── actions
 │   │   │       │   ├── comments.test.js
-│   │   │       │   ├── helpers.js
 │   │   │       │   ├── list.test.js
 │   │   │       │   └── receipts.test.js
 │   │   │       └── reducers.test.js
@@ -103,6 +103,7 @@ Technologies and Tools
 │   └── utils
 │       ├── constants.js
 │       ├── fixtures
+│       │   ├── helpers.js
 │       │   └── index.js
 │       └── functions.js
 ```
@@ -137,3 +138,10 @@ For the `Redux` parts;
 - It took me approxiamtely ~ 40 hours (spread over 2.5weeks ) to design, implement and write unit tests for the project
 - Nothing really difficult. Just that it's hard to know when to stop, since there's only one chance of impressing the extremely talented software engineers at Pleo
 - I am proud of using Redux for state management and my architecture skills
+
+### How to run the app
+
+- Clone the project respository and cd into the root directory: `cd pleoxpensify`
+- On your terminal, from the root `cd backend/api && npm install && npm start` to run the backend api
+- Open a new tab on your terminal, and from the project root directory `cd pleoxpensify && npm install && npm start`
+- Press 'y' and enter
