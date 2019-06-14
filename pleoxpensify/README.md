@@ -120,7 +120,7 @@ For the `Components` I made 3 kinds of assertions:
 
 - Given a set of inputs( state & props ), assert what the component should render.
 - Given a user action, assert how the component behaves. The component might make a state update(`mapStateTopProps or setState`) or call a prop-function(`dispatch`) passed to it by a parent.
-- Only the rendering of the components without a Redux store are tested, hence, I `export`ed the undecorated named components
+- Only the rendering of the components without a Redux store are tested(except for the `comment redux form`), hence, I `export`ed the undecorated named components
 
 For the `Redux` parts;
 
