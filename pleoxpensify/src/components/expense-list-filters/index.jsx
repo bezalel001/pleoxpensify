@@ -27,7 +27,7 @@ import {
  */
 import './style.scss';
 
-class ExpenseListFilters extends Component {
+export class ExpenseListFilters extends Component {
   static propTypes = {
     filters: PropTypes.shape({
       filterText: PropTypes.string,
@@ -35,7 +35,10 @@ class ExpenseListFilters extends Component {
       filterStartDate: PropTypes.instanceOf(moment),
       filterEndDate: PropTypes.instanceOf(moment)
     }).isRequired,
-    dispatch: PropTypes.func.isRequired
+    setText: PropTypes.func.isRequired,
+    setEndDate: PropTypes.func.isRequired,
+    setStartDate: PropTypes.func.isRequired,
+    setCurrency: PropTypes.func.isRequired
   };
 
   state = {
@@ -43,10 +46,24 @@ class ExpenseListFilters extends Component {
   };
 
   onDatesChange = ({ startDate, endDate }) => {
-    const { dispatch } = this.props;
+    const { setStartDate, setEndDate } = this.props;
 
-    dispatch(setFilterStartDate(startDate));
-    dispatch(setFilterEndDate(endDate));
+    setStartDate(startDate);
+    setEndDate(endDate);
+  };
+
+  onFilterTextChange = e => {
+    const { setText } = this.props;
+    setText(e.target.value);
+  };
+
+  onFilterCurrencyChange = e => {
+    const { setCurrency } = this.props;
+    setCurrency(e.target.value);
+  };
+
+  onFocusChange = focusedInput => {
+    this.setState({ calenderFocusedInput: focusedInput });
   };
 
   render() {
@@ -57,7 +74,7 @@ class ExpenseListFilters extends Component {
       filterStartDate,
       filterEndDate
     } = filters;
-    const { dispatch } = this.props;
+
     const { calenderFocusedInput } = this.state;
 
     return (
@@ -65,17 +82,13 @@ class ExpenseListFilters extends Component {
         <input
           type="text"
           value={filterText}
-          onChange={e => {
-            dispatch(setFilterText(e.target.value));
-          }}
+          onChange={this.onFilterTextChange}
           className="expense-list-filters__search-text"
           placeholder="Search Expenses"
         />
         <select
           value={filterCurrency}
-          onChange={e => {
-            dispatch(setFilterCurrency(e.target.value));
-          }}
+          onChange={this.onFilterCurrencyChange}
           className="expense-list-filters__select-currency"
         >
           <option value="">Currencies</option>
@@ -90,9 +103,7 @@ class ExpenseListFilters extends Component {
           endDateId={uuid()}
           onDatesChange={this.onDatesChange}
           focusedInput={calenderFocusedInput}
-          onFocusChange={focusedInput =>
-            this.setState({ calenderFocusedInput: focusedInput })
-          }
+          onFocusChange={this.onFocusChange}
           showClearDates
           numberOfMonths={1}
           isOutsideRange={() => false}
@@ -106,4 +117,17 @@ const mapStateToProps = state => {
     filters: state.filters
   };
 };
-export default connect(mapStateToProps)(ExpenseListFilters);
+
+const mapDispatchToProps = dispatch => {
+  return {
+    setText: text => dispatch(setFilterText(text)),
+    setCurrency: currency => dispatch(setFilterCurrency(currency)),
+    setStartDate: startDate => dispatch(setFilterStartDate(startDate)),
+    setEndDate: endDate => dispatch(setFilterEndDate(endDate))
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ExpenseListFilters);
