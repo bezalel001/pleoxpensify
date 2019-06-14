@@ -2,7 +2,7 @@
 
 This app fetches all expenses from the provided API. Allows the user to add notes and upload receipt pictures to each expense.
 
-Technologies and Tools
+### Technologies and Tools
 
 - Javascript
 - React & Redux
@@ -39,6 +39,9 @@ Technologies and Tools
 │   │   │   ├── index.jsx
 │   │   │   ├── style.scss
 │   │   │   └── test
+│   │   │       ├── __snapshots__
+│   │   │       │   └── expense-list-filters.test.js.snap
+│   │   │       └── expense-list-filters.test.js
 │   │   ├── expense-list-item
 │   │   │   ├── index.jsx
 │   │   │   ├── style.scss
