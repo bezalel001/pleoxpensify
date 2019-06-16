@@ -145,6 +145,6 @@ For the `Redux` parts;
 ### How to run the app
 
 - Clone the project respository and cd into the root directory: `cd pleoxpensify`
-- On your terminal, from the root `cd backend/api && npm install && npm start` to run the backend api
-- Open a new tab on your terminal, and from the project root directory `cd pleoxpensify && npm install && npm start`
+- From the root directory `cd backend/api && npm install && npm start` to run the backend api
+- Open a new terminal window. From the root directory `cd pleoxpensify && npm install && npm start` to run the React app
 - Press 'y' and enter
