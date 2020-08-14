@@ -1,4 +1,4 @@
-# Front-end challenge
+# Expenses
 Implement an expenses list fetching all expenses from the provided API. Allow the user to add notes and upload receipt pictures to each expense.
 
 
